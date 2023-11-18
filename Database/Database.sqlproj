@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{1d65fb80-8dd2-4258-9657-204c972d6284}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql150DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -62,5 +62,15 @@
     <Folder Include="dbo\StoredProcedures" />
     <Folder Include="PublishLocations" />
     <Folder Include="PostDeploymentScripts" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PublishLocations\LocalDB.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\Uritus.sql" />
+    <Build Include="dbo\Tables\Makseviis.sql" />
+    <Build Include="dbo\Tables\Eraisik.sql" />
+    <Build Include="dbo\Tables\Ettevote.sql" />
+    <Build Include="dbo\Tables\Osaleja.sql" />
   </ItemGroup>
 </Project>
