@@ -9,3 +9,5 @@
 	FROM dbo.Osaleja 
 	LEFT JOIN dbo.Eraisik ON dbo.Osaleja.EraisikId = dbo.Eraisik.Id 
 	LEFT JOIN dbo.Makseviis ON dbo.Osaleja.MakseviisId = dbo.Makseviis.Id 
+	WHERE 
+	dbo.Osaleja.Kustutatud = 0 
