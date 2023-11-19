@@ -7,14 +7,11 @@ namespace DataAccessLayer.Logic
     {
         private readonly MyDbContext _dbContext = context;
 
-        public void Dispose()
-        {
-            _dbContext.Dispose();
-        }
+        public void Dispose() => _dbContext.Dispose();
 
         public IUritus? GetUritusById(int id)
         {
-            var dbUritus = _dbContext.Uritused.Find(id);
+            var dbUritus = _dbContext.Uritus.Find(id);
 
             return dbUritus == null
                 ? null
