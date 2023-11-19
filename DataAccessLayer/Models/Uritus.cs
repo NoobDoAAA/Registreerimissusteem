@@ -1,4 +1,4 @@
-﻿namespace DataAccessLayer.DbModels
+﻿namespace DataAccessLayer.Models
 {
     public class Uritus
     {
