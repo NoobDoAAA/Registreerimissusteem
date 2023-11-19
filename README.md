@@ -1,4 +1,4 @@
-# RIK - Registrite ja Infosüsteemide Keskuse .NET tarkvaraarendaja prooviülesanne
+## RIK - Registrite ja Infosüsteemide Keskuse .NET tarkvaraarendaja prooviülesanne
 
 \
 Hea asi värskenda oma **.NET Web Development** oskused ja vaadata mida hetkel Microsoft üldse teeb.
