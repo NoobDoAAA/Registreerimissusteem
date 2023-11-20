@@ -9,9 +9,9 @@ namespace DataAccessLayer.Logic
 
         public void Dispose() => _dbContext.Dispose();
 
-        public IUritus? GetUritusById(int id)
+        public IUritus? GetUritusById(int Id)
         {
-            var dbUritus = _dbContext.Uritus.Find(id);
+            var dbUritus = _dbContext.Uritus.Find(Id);
 
             return dbUritus == null
                 ? null

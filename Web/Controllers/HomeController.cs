@@ -1,7 +1,9 @@
 using DataAccessLayer;
+using DataAccessLayer.Interfaces;
 using DataAccessLayer.Logic;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Web.Controllers.Helpers;
 using Web.Models;
 
 namespace Web.Controllers
@@ -21,9 +23,14 @@ namespace Web.Controllers
         {
             using (UritusHandler handler = new(_context))
             {
-                UritusViewModel? model = handler.GetUritusById(1) as UritusViewModel;
+                var data = handler.GetUritusById(1);
 
-                ViewData["Uritus"] = model;
+                if (data != null)
+                {
+                    var model = Mapper.Mapped<UritusViewModel>(data);
+
+                    ViewData["Uritus"] = model;
+                }
             };
 
             // ...
