@@ -9,9 +9,9 @@ namespace DataAccessLayer.Logic
 
         public void Dispose() => _dbContext.Dispose();
 
-        public IUritus? GetUritusById(int Id)
+        public async Task<IUritus?> GetUritusById(int Id)
         {
-            var dbUritus = _dbContext.Uritus.Find(Id);
+            var dbUritus = await _dbContext.Uritus.FindAsync(Id);
 
             return dbUritus == null
                 ? null

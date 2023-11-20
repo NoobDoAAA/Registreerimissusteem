@@ -23,11 +23,13 @@ namespace Web.Controllers
         {
             using (UritusHandler handler = new(_context))
             {
-                var data = handler.GetUritusById(1);
+                var query = handler.GetUritusById(1);
 
-                if (data != null)
+                query.Wait();
+
+                if (query.Result != null)
                 {
-                    var model = Mapper.Mapped<UritusViewModel>(data);
+                    var model = Mapper.Mapped<UritusViewModel>(query.Result);
 
                     ViewData["Uritus"] = model;
                 }
