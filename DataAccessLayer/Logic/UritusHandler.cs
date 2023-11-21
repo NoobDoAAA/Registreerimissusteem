@@ -29,7 +29,7 @@ namespace DataAccessLayer.Logic
         }
 
         /// <summary>
-        /// Uritused nimekiri
+        /// Planeeritud uritused nimekiri
         /// </summary>
         public async Task<IList<IUritus>> GetPlaneeritudUritused()
         {
@@ -57,6 +57,37 @@ namespace DataAccessLayer.Logic
 
             return result;
         }
+
+        /// <summary>
+        /// Moodunud uritused nimekiri
+        /// </summary>
+        public async Task<IList<IUritus>> GetMoodunudUritused()
+        {
+            var dbUritused = await GetAllUritused().Where(u => !u.Kustutatud && u.Toimumisaeg < DateTime.Now).ToListAsync();
+
+            var result = new List<IUritus>();
+
+            foreach (var u in dbUritused)
+            {
+                var arv = ArvutaOsavotjateArv(u.Id);
+
+                arv.Wait();
+
+                result.Add(
+                    item: new UritusDto
+                    {
+                        Id = u.Id,
+                        Nimi = u.Nimi,
+                        Toimumisaeg = u.Toimumisaeg,
+                        ToimumiseKoht = u.ToimumiseKoht,
+                        Lisainfo = u.Lisainfo,
+                        OsavotjateArv = arv.Result
+                    });
+            }
+
+            return result;
+        }
+
 
         public async Task<IUritus?> GetUritusById(int Id)
         {

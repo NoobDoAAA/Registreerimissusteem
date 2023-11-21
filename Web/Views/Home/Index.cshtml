@@ -16,15 +16,25 @@
                     Planeeritud Üritused
                 </button>
             </h2>
-            <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne">
                 <div class="accordion-body">
 
-                    @foreach (var item in Model)
+                    @foreach (var item in ViewBag.PlaneeritudUritused)
                     {
-                        <span>@item.ToimumiseKoht</span>
-                        <br />
-
-
+                        <div class="row row-cols-5">
+                            <div class="col-4 my-col">
+                                @item.Nimi
+                            </div>
+                            <div class="col my-col">
+                                @item.Toimumisaeg
+                            </div>
+                            <div class="col my-col">
+                                @item.ToimumiseKoht
+                            </div>
+                            <div class="col my-col">
+                                @item.OsavotjateArv
+                            </div>
+                        </div>
                     }
 
                 </div>
@@ -36,10 +46,26 @@
                     Möödunud Üritused
                 </button>
             </h2>
-            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo">
                 <div class="accordion-body">
 
-
+                    @foreach (var item in ViewBag.MoodunudUritused)
+                    {
+                        <div class="row row-cols-5">
+                            <div class="col-4 my-col">
+                                @item.Nimi
+                            </div>
+                            <div class="col my-col">
+                                @item.Toimumisaeg
+                            </div>
+                            <div class="col my-col">
+                                @item.ToimumiseKoht
+                            </div>
+                            <div class="col my-col">
+                                @item.OsavotjateArv
+                            </div>
+                        </div>
+                    }
 
                 </div>
             </div>
