@@ -2,7 +2,6 @@
 using DataAccessLayer.Interfaces;
 using DataAccessLayer.ModelsDb;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace DataAccessLayer.Logic
 {
@@ -29,6 +28,9 @@ namespace DataAccessLayer.Logic
             return await GetAllOsalejad().Where(o => o.UritusId == UritusId).SumAsync(o => o.OsavotjateArv);
         }
 
+        /// <summary>
+        /// Uritused nimekiri
+        /// </summary>
         public async Task<IList<IUritus>> GetPlaneeritudUritused()
         {
             var dbUritused = await GetAllUritused().Where(u => !u.Kustutatud && u.Toimumisaeg > DateTime.Now).ToListAsync();

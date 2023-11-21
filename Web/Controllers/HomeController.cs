@@ -26,10 +26,10 @@ namespace Web.Controllers
 
                 query.Wait();
 
-                ViewData["Uritused"] = query.Result.Select(Mapper.MappIt<UritusViewModel>).ToList();
-            }
+                var model = query.Result.Select(Mapper.MappIt<UritusViewModel>).ToList();
 
-            return View();
+                return View(model);
+            }
         }
 
         public IActionResult Privacy()
