@@ -4,7 +4,7 @@ namespace Web.Controllers.Helpers
 {
     internal static class Mapper
     {
-        public static T? Mapped<T>(object source)
+        public static T? MappIt<T>(object source)
         {
             var output = Activator.CreateInstance(typeof(T));
 

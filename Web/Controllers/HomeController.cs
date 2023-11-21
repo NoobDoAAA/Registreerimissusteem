@@ -22,19 +22,12 @@ namespace Web.Controllers
         {
             using (UritusHandler handler = new(_context))
             {
-                var query = handler.GetUritusById(1);
+                var query = handler.GetPlaneeritudUritused();
 
                 query.Wait();
 
-                if (query.Result != null)
-                {
-                    var model = Mapper.Mapped<UritusViewModel>(query.Result);
-
-                    ViewData["Uritus"] = model;
-                }
-            };
-
-            // ...
+                ViewData["Uritused"] = query.Result.Select(Mapper.MappIt<UritusViewModel>).ToList();
+            }
 
             return View();
         }
