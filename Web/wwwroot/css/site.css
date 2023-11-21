@@ -45,4 +45,8 @@ header {
   margin-left: 2rem;
 }
 
+.my-navbar-brand:hover {
+  color: #fff;
+}
+
 

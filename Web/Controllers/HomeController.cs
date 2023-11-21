@@ -36,8 +36,6 @@ namespace Web.Controllers
 
             // ...
 
-            ViewData["Title"] = "Koduleht";
-
             return View();
         }
 
