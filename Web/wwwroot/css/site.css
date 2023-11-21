@@ -67,4 +67,10 @@ header {
   border: 1px solid rgba(39,41,43,0.1);
 }
 
+.header-col {
+  padding: 0.5rem;
+  background-color: #fcd397;
+  border: 1px solid rgba(39,41,43,0.1);
+}
+
 

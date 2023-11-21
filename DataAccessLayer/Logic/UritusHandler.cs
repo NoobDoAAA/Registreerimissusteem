@@ -5,22 +5,28 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Logic
 {
-    public class UritusHandler(MyDbContext context) : IDisposable
+    public class UritusHandler : IDisposable
     {
-        private readonly MyDbContext _dbContext = context;
+        private readonly MyDbContext _dbContext;
 
-        public void Dispose() => _dbContext.Dispose();
+        public UritusHandler(MyDbContext context)
+        {
+            _dbContext = context;
+        }
 
+        public void Dispose()
+        {
+            _dbContext.Dispose();
+        }
 
         private IQueryable<Uritus> GetAllUritused()
         {
-            return context.Uritus.AsQueryable();
+            return _dbContext.Uritus.AsQueryable();
         }
 
         private IQueryable<Osaleja> GetAllOsalejad()
         {
-
-            return context.Osaleja.AsQueryable();
+            return _dbContext.Osaleja.AsQueryable();
         }
 
         private async Task<int> ArvutaOsavotjateArv(int UritusId)
@@ -87,7 +93,6 @@ namespace DataAccessLayer.Logic
 
             return result;
         }
-
 
         public async Task<IUritus?> GetUritusById(int Id)
         {

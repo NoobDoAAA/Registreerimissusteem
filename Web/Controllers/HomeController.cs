@@ -18,6 +18,7 @@ namespace Web.Controllers
             _context = context;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             using (UritusHandler handler = new(_context))
@@ -38,6 +39,7 @@ namespace Web.Controllers
             }
         }
 
+        [HttpGet]
         public IActionResult Privacy()
         {
             return View();
