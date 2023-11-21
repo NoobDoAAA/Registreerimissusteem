@@ -18,6 +18,17 @@ namespace DataAccessLayer.Logic
             return context.Uritus.AsQueryable();
         }
 
+        private IQueryable<Osaleja> GetAllOsalejad()
+        {
+
+            return context.Osaleja.AsQueryable();
+        }
+
+        private async Task<int> ArvutaOsavotjateArv(int UritusId)
+        {
+            return await GetAllOsalejad().Where(o => o.UritusId == UritusId).SumAsync(o => o.OsavotjateArv);
+        }
+
         public async Task<IList<IUritus>> GetPlaneeritudUritused()
         {
             var dbUritused = await GetAllUritused().Where(u => !u.Kustutatud && u.Toimumisaeg > DateTime.Now).ToListAsync();
@@ -26,6 +37,10 @@ namespace DataAccessLayer.Logic
 
             foreach (var u in dbUritused)
             {
+                var arv = ArvutaOsavotjateArv(u.Id);
+
+                arv.Wait();
+
                 result.Add(
                     item: new UritusDto
                     {
@@ -33,7 +48,8 @@ namespace DataAccessLayer.Logic
                         Nimi = u.Nimi,
                         Toimumisaeg = u.Toimumisaeg,
                         ToimumiseKoht = u.ToimumiseKoht,
-                        Lisainfo = u.Lisainfo
+                        Lisainfo = u.Lisainfo,
+                        OsavotjateArv = arv.Result
                     });
             }
 
