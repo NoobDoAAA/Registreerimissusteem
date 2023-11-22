@@ -28,8 +28,13 @@ function EemaldaUritus(id) {
     target.html(loader.html());
 
     $.post("/Home/EemaldaUritus", { Id: id }, function () {
-        setTimeout(function () { target.load("/Home/PlaneeritudUritused"); }, 750);
+        setTimeout(function () { target.load("/Home/PlaneeritudUritused"); }, 550);
     });
+}
+
+function LisaUritus() {
+
+    $("div#UritusModal").modal("show");
 }
 
 

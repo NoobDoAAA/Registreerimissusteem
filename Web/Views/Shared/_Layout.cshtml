@@ -5,25 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Registreerimissüsteem</title>
 	<style>
-	div#main-loader {
-	  top: 0;
-	  left: 0;
-	  height: 100vh;
-	  width: 100vw;
-	  position: fixed;
-	  background: #feefdc;
-	  z-index: 7;
-	}
+	    div#main-loader {
+	      top: 0;
+	      left: 0;
+	      height: 100vh;
+	      width: 100vw;
+	      position: fixed;
+	      background: #feefdc;
+	      z-index: 7;
+	    }
 	</style>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="~/css/loader.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/loader.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Web.styles.css" asp-append-version="true" />
 </head>
 <body>
-	<div id="main-loader">
-		<div class="main-loader"><div></div><div></div><div></div></div>
-	</div>
+    <div id="main-loader">
+        <div class="main-loader"><div></div><div></div><div></div></div>
+    </div>
 
     <header>
         <nav class="navbar border-bottom box-shadow">
@@ -48,9 +48,10 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-	<script>
-		$(window).on("load", function(){ StartUp(); });
-	</script>
+    <script>
+        $(window).on("load", function () { StartUp(); });
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

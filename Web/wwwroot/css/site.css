@@ -73,4 +73,7 @@ header {
   border: 1px solid rgba(39,41,43,0.1);
 }
 
-
+.my-btn-success {
+  font-size: 1.5rem;
+  padding: 0.7rem 5rem;
+}

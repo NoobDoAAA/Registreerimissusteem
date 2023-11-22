@@ -110,21 +110,5 @@ namespace DataAccessLayer.Logic
             else
                 return false;
         }
-
-        public async Task<IUritus?> GetUritusById(int Id)
-        {
-            var dbUritus = await _dbContext.Uritus.FindAsync(Id);
-
-            return dbUritus == null
-                ? null
-                : new UritusDto
-                {
-                    Id = dbUritus.Id,
-                    Nimi = dbUritus.Nimi,
-                    Toimumisaeg = dbUritus.Toimumisaeg,
-                    ToimumiseKoht = dbUritus.ToimumiseKoht,
-                    Lisainfo = dbUritus.Lisainfo
-                };
-        }
     }
 }
