@@ -32,6 +32,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}");
-app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=PlaneeritudUritused}/{id?}");
+app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=PlaneeritudUritused}");
+app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=EemaldaUritus}/{Id}");
 
 app.Run();

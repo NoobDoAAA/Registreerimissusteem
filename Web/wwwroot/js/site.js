@@ -27,5 +27,9 @@ function EemaldaUritus(id) {
 
     target.html(loader.html());
 
-    setTimeout(function () { target.load("/Home/PlaneeritudUritused"); }, 750);
+    $.post("/Home/EemaldaUritus", { Id: id }, function () {
+        setTimeout(function () { target.load("/Home/PlaneeritudUritused"); }, 750);
+    });
 }
+
+

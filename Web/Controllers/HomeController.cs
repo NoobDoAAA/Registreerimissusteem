@@ -54,6 +54,22 @@ namespace Web.Controllers
             return PartialView();
         }
 
+        [HttpPost]
+        public JsonResult EemaldaUritus(int Id)
+        {
+            using (UritusHandler handler = new(_context))
+            {
+                var query = handler.EemaldaUritus(Id);
+
+                query.Wait();
+
+                return Json(new
+                {
+                    Tehtud = query.Result
+                });
+            }
+        }
+
         [HttpGet]
         public IActionResult Privacy()
         {

@@ -94,6 +94,23 @@ namespace DataAccessLayer.Logic
             return result;
         }
 
+        /// <summary>
+        /// Urituse tuhistamine
+        /// </summary>
+        public async Task<bool> EemaldaUritus(int Id)
+        {
+            var dbUritus = await _dbContext.Uritus.FindAsync(Id);
+
+            if (dbUritus != null)
+            {
+                dbUritus.Kustutatud = true;
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            else
+                return false;
+        }
+
         public async Task<IUritus?> GetUritusById(int Id)
         {
             var dbUritus = await _dbContext.Uritus.FindAsync(Id);

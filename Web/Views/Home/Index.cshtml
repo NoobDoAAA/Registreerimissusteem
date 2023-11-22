@@ -19,7 +19,14 @@
             <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne">
                 <div id="planeeritud-uritused" class="accordion-body">
 
-                    <partial name="PlaneeritudUritused.cshtml">
+                    @if (ViewBag.PlaneeritudUritused == null || !Enumerable.Any(ViewBag.PlaneeritudUritused))
+                    {
+                        <span>Ei ole veel ühtegi...</span>
+                    }
+                    else
+                    {
+                        <partial name="PlaneeritudUritused.cshtml" />
+                    }
 
                 </div>
             </div>
@@ -33,37 +40,13 @@
             <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo">
                 <div class="accordion-body">
 
-                    <div class="row">
-                        <div class="col-6 header-col">
-                            Nimetus
-                        </div>
-                        <div class="col header-col">
-                            Toimumisaeg
-                        </div>
-                        <div class="col header-col">
-                            Toimumise Koht
-                        </div>
-                        <div class="col-1 header-col">
-                            Osavõtjad
-                        </div>
-                    </div>
-
-                    @foreach (var item in ViewBag.MoodunudUritused)
+                    @if (ViewBag.MoodunudUritused == null || !Enumerable.Any(ViewBag.MoodunudUritused))
                     {
-                        <div class="row">
-                            <div class="col-6 my-col">
-                                @item.Nimi
-                            </div>
-                            <div class="col my-col">
-                                @item.Toimumisaeg
-                            </div>
-                            <div class="col my-col">
-                                @item.ToimumiseKoht
-                            </div>
-                            <div class="col-1 my-col">
-                                @item.OsavotjateArv
-                            </div>
-                        </div>
+                        <span>Ei ole veel ühtegi...</span>
+                    }
+                    else
+                    {
+                        <partial name="_MoodunudUritused.cshtml" />
                     }
 
                 </div>
@@ -73,4 +56,4 @@
 </div>
 
 <!-- Loaders -->
-<partial name="_Loaders.cshtml">
+<partial name="_Loaders.cshtml" />
