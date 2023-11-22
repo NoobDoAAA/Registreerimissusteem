@@ -2,24 +2,30 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-$.ajaxSetup({ cache:false });
+$.ajaxSetup({ cache: false });
 
 
-function StartUp(){
+function StartUp() {
 
-	setTimeout(HideMainLoader, 650);
-
-	
+    setTimeout(HideMainLoader, 1150);
 }
 
 
-function HideMainLoader(){
+function HideMainLoader() {
 
-	$("div.main-loader").fadeOut(350, function()
-	{
-		$("html, body").css("overflow", "auto");
-		$("div#main-loader").fadeOut(950);
-	});
+    $("div.main-loader").fadeOut(350, function () {
+        $("html, body").css("overflow", "auto");
+        $("div#main-loader").fadeOut(950);
+    });
 }
 
 
+function EemaldaUritus(id) {
+
+    var loader = $("section#uritused-loader");
+    var target = $("div#planeeritud-uritused");
+
+    target.html(loader.html());
+
+    setTimeout(function () { target.load("/Home/PlaneeritudUritused"); }, 750);
+}

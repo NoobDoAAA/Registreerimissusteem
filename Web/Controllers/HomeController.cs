@@ -40,6 +40,21 @@ namespace Web.Controllers
         }
 
         [HttpGet]
+        public IActionResult PlaneeritudUritused()
+        {
+            using (UritusHandler handler = new(_context))
+            {
+                var planeeritud = handler.GetPlaneeritudUritused();
+
+                planeeritud.Wait();
+
+                ViewBag.PlaneeritudUritused = planeeritud.Result.Select(Mapper.MappIt<UritusViewModel>).ToList();
+            }
+
+            return PartialView();
+        }
+
+        [HttpGet]
         public IActionResult Privacy()
         {
             return View();

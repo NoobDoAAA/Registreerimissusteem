@@ -17,44 +17,9 @@
                 </button>
             </h2>
             <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne">
-                <div class="accordion-body">
+                <div id="planeeritud-uritused" class="accordion-body">
 
-                    <div class="row">
-                        <div class="col-6 header-col">
-                            Nimetus
-                        </div>
-                        <div class="col header-col">
-                            Toimumisaeg
-                        </div>
-                        <div class="col header-col">
-                            Toimumise Koht
-                        </div>
-                        <div class="col-1 header-col">
-                            Osavõtjad
-                        </div>
-                        <div class="col-1 header-col">
-                        </div>
-                    </div>
-
-                    @foreach (var item in ViewBag.PlaneeritudUritused)
-                    {
-                        <div class="row">
-                            <div class="col-6 my-col">
-                                @item.Nimi
-                            </div>
-                            <div class="col my-col">
-                                @item.Toimumisaeg
-                            </div>
-                            <div class="col my-col">
-                                @item.ToimumiseKoht
-                            </div>
-                            <div class="col-1 my-col">
-                                @item.OsavotjateArv
-                            </div>
-                            <div class="col-1 my-col">
-                            </div>
-                        </div>
-                    }
+                    <partial name="PlaneeritudUritused.cshtml">
 
                 </div>
             </div>
@@ -81,8 +46,6 @@
                         <div class="col-1 header-col">
                             Osavõtjad
                         </div>
-                        <div class="col-1 header-col">
-                        </div>
                     </div>
 
                     @foreach (var item in ViewBag.MoodunudUritused)
@@ -100,8 +63,6 @@
                             <div class="col-1 my-col">
                                 @item.OsavotjateArv
                             </div>
-                            <div class="col-1 my-col">
-                            </div>
                         </div>
                     }
 
@@ -110,3 +71,6 @@
         </div>
     </div>
 </div>
+
+<!-- Loaders -->
+<partial name="_Loaders.cshtml">
