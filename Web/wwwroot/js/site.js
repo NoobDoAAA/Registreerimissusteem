@@ -20,7 +20,17 @@ function HideMainLoader() {
 }
 
 
+function AlustaUrituseEemaldamine(id, nimetus) {
+
+    $("span#uritus-nimi-delete-modal").html("\"" + nimetus + "\"");
+    $("button#uritus-delete-modal-delete-btn").attr("onClick", "EemaldaUritus(" + id + ")");
+    $("div#uritus-delete-modal").modal("show");
+}
+
+
 function EemaldaUritus(id) {
+
+    $("div#uritus-delete-modal").modal("hide");
 
     var loader = $("section#uritused-loader");
     var target = $("div#planeeritud-uritused");
@@ -34,7 +44,7 @@ function EemaldaUritus(id) {
 
 function LisaUritus() {
 
-    $("div#UritusModal").modal("show");
+
 }
 
 

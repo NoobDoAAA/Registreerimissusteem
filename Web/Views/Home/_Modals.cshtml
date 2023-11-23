@@ -2,20 +2,41 @@
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
-<!-- Modal -->
-<div class="modal fade" id="uritus-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="uritus-modal-title" aria-hidden="true">
+<!-- Ürituse Tühistamine Modal -->
+
+<div class="modal fade" id="uritus-delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="uritus-delete-modal-title" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="uritus-modal-title">Modal title</h1>
+                <h1 class="modal-title fs-5" id="uritus-delete-modal-title">Ürituse Tühistamine</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Kas oled kindel, et soovid üritus &nbsp;<span id="uritus-nimi-delete-modal" style="font-size:1.2rem"></span>&nbsp; tühista?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Katkesta</button>
+                <button type="button" class="btn btn-danger" id="uritus-delete-modal-delete-btn">Tühista Üritus</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Ürituse Lisamine Modal -->
+
+<div class="modal fade" id="uritus-add-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="uritus-add-modal-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="uritus-add-modal-title">Ürituse Lisamine</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 ...
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Understood</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Katkesta</button>
+                <button type="button" class="btn btn-success" id="uritus-delete-modal-delete-btn">Lisa Üritus</button>
             </div>
         </div>
     </div>
