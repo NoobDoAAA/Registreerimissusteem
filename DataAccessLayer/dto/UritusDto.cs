@@ -2,7 +2,7 @@
 
 namespace DataAccessLayer.dto
 {
-    internal class UritusDto : IUritus
+    public class UritusDto : IUritus
     {
         public int Id { get; set; }
         public required string Nimi { get; set; }

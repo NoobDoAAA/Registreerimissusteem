@@ -1,7 +1,12 @@
-﻿namespace DataAccessLayer.ModelsDb
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace DataAccessLayer.ModelsDb
 {
     public class Uritus
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public required string Nimi { get; set; }
         public DateTime Toimumisaeg { get; set; }

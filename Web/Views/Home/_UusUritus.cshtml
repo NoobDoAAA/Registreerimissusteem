@@ -1,0 +1,37 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+
+<form id="uus-uritus">
+
+    <div class="mb-3">
+        <label for="urituse-nimetus" class="form-label">Nimetus:</label>
+        <input type="text" class="form-control" id="urituse-nimetus" name="Nimi" value="" minlength="3" maxlength="50" required />
+        <div class="invalid-feedback">
+            Peaks olema Nimetus!
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="urituse-toimumisaeg" class="form-label">Toimumisaeg:</label>
+        <input type="text" class="form-control" id="urituse-toimumisaeg" name="Toimumisaeg" value="" maxlength="16" required />
+        <div class="invalid-feedback">
+            Peaks olema Toimumisaeg!
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="urituse-toimumisekoht" class="form-label">Toimumise Koht:</label>
+        <input type="text" class="form-control" id="urituse-toimumisekoht" name="ToimumiseKoht" value="" minlength="3" maxlength="100" required />
+        <div class="invalid-feedback">
+            Peaks olema Toimumise Koht!
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="urituse-lisainfo" class="form-label">Lisainfo:</label>
+        <textarea class="form-control" id="urituse-lisainfo" rows="5" name="Lisainfo" value="" maxlength="1000"></textarea>
+    </div>
+
+</form>

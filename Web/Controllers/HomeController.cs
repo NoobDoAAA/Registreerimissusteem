@@ -1,9 +1,11 @@
 using DataAccessLayer;
+using DataAccessLayer.dto;
 using DataAccessLayer.Logic;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Web.Controllers.Helpers;
 using Web.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Web.Controllers
 {
@@ -65,9 +67,31 @@ namespace Web.Controllers
 
                 return Json(new
                 {
-                    Tehtud = query.Result
+                    tehtud = query.Result
                 });
             }
+        }
+
+        [HttpPost]
+        public JsonResult LisaUritus(UritusViewModel uritus)
+        {
+            if (ModelState.IsValid)
+            {
+                using (UritusHandler handler = new(_context))
+                {
+                    handler.LisaUritus(Mapper.MappIt<UritusDto>(uritus));
+
+                    return Json(new
+                    {
+                        tehtud = true
+                    });
+                }
+            }
+
+            return Json(new
+            {
+                tehtud = false
+            });
         }
 
         [HttpGet]

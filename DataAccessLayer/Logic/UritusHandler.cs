@@ -2,6 +2,7 @@
 using DataAccessLayer.Interfaces;
 using DataAccessLayer.ModelsDb;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace DataAccessLayer.Logic
 {
@@ -109,6 +110,28 @@ namespace DataAccessLayer.Logic
             }
             else
                 return false;
+        }
+
+        /// <summary>
+        /// Urituse lisamine
+        /// </summary>
+        public bool LisaUritus(UritusDto? uritusDto)
+        {
+            if (uritusDto == null) return false;
+
+            Uritus uritus = new()
+            {
+                Nimi = uritusDto.Nimi,
+                Toimumisaeg = uritusDto.Toimumisaeg,
+                ToimumiseKoht = uritusDto.ToimumiseKoht,
+                Lisainfo = uritusDto.Lisainfo,
+                Kustutatud = false
+            };
+
+            _dbContext.Uritus.Add(uritus);
+            _dbContext.SaveChanges();
+
+            return true;
         }
     }
 }
