@@ -1,0 +1,28 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<!-- Ürituse Lisamine Modal -->
+
+<div class="modal fade" id="uritus-edit-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="uritus-edit-modal-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="uritus-edit-modal-title">Ürituse Muutmine</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <partial name="_MuudaUritus.cshtml" />
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Katkesta</button>
+                <button type="button" class="btn btn-warning" onclick="MuudaUritus()">
+                    <span class="spinner-border spinner-border-sm d-none" id="uritus-edit-modal-spinner" role="status" aria-hidden="true"></span>
+                    Muuda Üritus
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

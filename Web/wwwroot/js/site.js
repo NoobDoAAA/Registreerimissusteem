@@ -35,6 +35,14 @@ function _verifyIdCode(idCode) {
 }
 
 
+function _visit(url) {
+
+    $("div#main-loader").fadeIn(350, function () {
+        location.href = url;
+    });
+}
+
+
 function _notEmpty(input) {
 
     return input.val().length != 0;
@@ -55,6 +63,15 @@ function _showPlaneeritudUritusedLoader() {
 
     var loader = $("section#uritused-loader");
     var target = $("div#planeeritud-uritused");
+
+    target.html(loader.html());
+}
+
+
+function _showUrituseAndmedLoader() {
+
+    var loader = $("section#urituse-andmed-loader");
+    var target = $("div#urituse-andmed");
 
     target.html(loader.html());
 }
@@ -86,6 +103,12 @@ function HideMainLoader() {
 }
 
 
+function VaataUritus(id) {
+
+    _visit("/Home/VaataUritus/" + id);
+}
+
+
 function AlustaUrituseEemaldamine(id, nimetus) {
 
     $("span#uritus-nimi-delete-modal").html("\"" + nimetus + "\"");
@@ -108,9 +131,7 @@ function EemaldaUritus(id) {
 }
 
 
-function LisaUritus() {
-
-    $("form#uus-uritus").addClass("was-validated");
+function _validateUritus() {
 
     var isValid = true;
 
@@ -120,7 +141,15 @@ function LisaUritus() {
 
     isValid = isValid && _notEmpty($("input#urituse-toimumisekoht"));
 
-    if (isValid) {
+    return isValid;
+}
+
+
+function LisaUritus() {
+
+    $("form#uus-uritus").addClass("was-validated");
+
+    if (_validateUritus()) {
 
         var spinner = $("span#uritus-add-modal-spinner");
 
@@ -143,9 +172,9 @@ function LisaUritus() {
 
                         var target = $("div#planeeritud-uritused");
 
-                        setTimeout(function () { target.load("/Home/PlaneeritudUritused"); }, 750);
+                        setTimeout(function () { target.load("/Home/PlaneeritudUritused"); }, 650);
 
-                    }, 550);
+                    }, 850);
                 }
 
             }, "json");
@@ -153,3 +182,39 @@ function LisaUritus() {
 }
 
 
+function MuudaUritus() {
+
+    $("form#muuda-uritus").addClass("was-validated");
+
+    if (_validateUritus()) {
+
+        var spinner = $("span#uritus-edit-modal-spinner");
+
+        spinner.removeClass("d-none");
+
+        $.post("/Home/MuudaUritus", $("form#muuda-uritus").serialize(),
+            function (response) {
+
+                if (response.tehtud) {
+
+                    setTimeout(function () {
+
+                        $("div#uritus-edit-modal").modal("hide");
+
+                        spinner.addClass("d-none");
+
+                        $("form#muuda-uritus").removeClass("was-validated");
+
+                        _showUrituseAndmedLoader();
+
+                        var target = $("div#urituse-andmed");
+                        var id = $("input#muuda-uritus-id").val();
+
+                        setTimeout(function () { target.load("/Home/UrituseAndmed", { Id: id }); }, 1250);
+
+                    }, 850);
+                }
+
+            }, "json");
+    }
+}

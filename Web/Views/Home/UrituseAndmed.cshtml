@@ -1,0 +1,24 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<table class="table">
+    <tbody>
+        <tr>
+            <td class="col-3">Nimetus:</td>
+            <td>@ViewBag.Uritus.Nimi</td>
+        </tr>
+        <tr>
+            <td class="col-3">Toimumisaeg:</td>
+            <td>@ViewBag.Uritus.Toimumisaeg.ToString("dd.MM.yyyy HH:mm")</td>
+        </tr>
+        <tr>
+            <td class="col-3">Toimumise Koht:</td>
+            <td>@ViewBag.Uritus.ToimumiseKoht</td>
+        </tr>
+        <tr>
+            <td class="col-3">Lisainfo:</td>
+            <td>@ViewBag.Uritus.Lisainfo</td>
+        </tr>
+    </tbody>
+</table>

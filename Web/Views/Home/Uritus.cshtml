@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Ürituse Ülevaade";
+}
+
+
+<div class="bg-light uritus-info">
+
+    <!-- Ürituse Andmed -->
+    <div id="urituse-andmed">
+
+        <partial name="UrituseAndmed.cshtml" />
+
+    </div>
+
+    <!-- Nav Tabs -->
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link link-info active" data-bs-toggle="tab" href="#osalejad-eraisikud">Osalejad - Eraisikud</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link link-info" data-bs-toggle="tab" href="#osalejad-ettevotted">Osalejad - Ettevõtted</a>
+        </li>
+    </ul>
+
+    <!-- Tab Panes -->
+    <div class="tab-content">
+        <div class="tab-pane container fade show active tab-pane-content" id="osalejad-eraisikud">...</div>
+        <div class="tab-pane container fade tab-pane-content" id="osalejad-ettevotted">...</div>
+    </div>
+
+</div>
+
+<div class="text-center" style="padding:2rem 0 5rem">
+
+    <button type="button" class="btn btn-success" onclick="_visit('/')">
+        &lt;&lt;&lt; Tagasi
+    </button>
+
+    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#uritus-edit-modal">
+        Muuda Üritus
+    </button>
+
+</div>
+
+<!-- Loaders -->
+<partial name="_Loaders.cshtml" />
+
+<!-- Modals -->
+<partial name="_ModalsUritus.cshtml" />

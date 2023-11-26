@@ -115,7 +115,7 @@ namespace DataAccessLayer.Logic
         /// <summary>
         /// Urituse lisamine
         /// </summary>
-        public bool LisaUritus(UritusDto? uritusDto)
+        public async Task<bool> LisaUritus(UritusDto? uritusDto)
         {
             if (uritusDto == null) return false;
 
@@ -128,10 +128,47 @@ namespace DataAccessLayer.Logic
                 Kustutatud = false
             };
 
-            _dbContext.Uritus.Add(uritus);
-            _dbContext.SaveChanges();
+            await _dbContext.Uritus.AddAsync(uritus);
+            await _dbContext.SaveChangesAsync();
 
             return true;
+        }
+
+        public async Task<bool> MuudaUritus(UritusDto? uritusDto)
+        {
+            if (uritusDto == null) return false;
+
+            var dbUritus = await _dbContext.Uritus.FindAsync(uritusDto.Id);
+
+            if (dbUritus == null) return false;
+
+            dbUritus.Nimi = uritusDto.Nimi;
+            dbUritus.Toimumisaeg = uritusDto.Toimumisaeg;
+            dbUritus.ToimumiseKoht = uritusDto.ToimumiseKoht;
+            dbUritus.Lisainfo = uritusDto.Lisainfo;
+
+            await _dbContext.SaveChangesAsync();
+
+            return true;
+        }
+
+        /// <summary>
+        /// Urituse andmed
+        /// </summary>
+        public async Task<IUritus?> GetUritusById(int id)
+        {
+            var dbUritus = await _dbContext.Uritus.FindAsync(id);
+
+            return dbUritus == null
+                ? null
+                : new UritusDto
+                {
+                    Id = dbUritus.Id,
+                    Nimi = dbUritus.Nimi,
+                    Toimumisaeg = dbUritus.Toimumisaeg,
+                    ToimumiseKoht = dbUritus.ToimumiseKoht,
+                    Lisainfo = dbUritus.Lisainfo
+                };
         }
     }
 }

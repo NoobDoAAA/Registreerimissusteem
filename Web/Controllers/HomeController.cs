@@ -72,6 +72,25 @@ namespace Web.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult VaataUritus(int Id)
+        {
+            using (UritusHandler handler = new(_context))
+            {
+                var uritus = handler.GetUritusById(Id);
+
+                uritus.Wait();
+
+                if (uritus.Result != null) ViewBag.Uritus = Mapper.MappIt<UritusViewModel>(uritus.Result);
+                else
+                    ViewBag.Uritus = null;
+            }
+
+
+
+            return View("Uritus");
+        }
+
         [HttpPost]
         public JsonResult LisaUritus(UritusViewModel uritus)
         {
@@ -79,7 +98,9 @@ namespace Web.Controllers
             {
                 using (UritusHandler handler = new(_context))
                 {
-                    handler.LisaUritus(Mapper.MappIt<UritusDto>(uritus));
+                    var query = handler.LisaUritus(Mapper.MappIt<UritusDto>(uritus));
+
+                    query.Wait();
 
                     return Json(new
                     {
@@ -92,6 +113,47 @@ namespace Web.Controllers
             {
                 tehtud = false
             });
+        }
+
+        [HttpPost]
+        public JsonResult MuudaUritus(UritusViewModel uritus)
+        {
+            if (ModelState.IsValid)
+            {
+                using (UritusHandler handler = new(_context))
+                {
+                    var query = handler.MuudaUritus(Mapper.MappIt<UritusDto>(uritus));
+
+                    query.Wait();
+
+                    return Json(new
+                    {
+                        tehtud = true
+                    });
+                }
+            }
+
+            return Json(new
+            {
+                tehtud = false
+            });
+        }
+
+        [HttpPost]
+        public IActionResult UrituseAndmed(int Id)
+        {
+            using (UritusHandler handler = new(_context))
+            {
+                var uritus = handler.GetUritusById(Id);
+
+                uritus.Wait();
+
+                if (uritus.Result != null) ViewBag.Uritus = Mapper.MappIt<UritusViewModel>(uritus.Result);
+                else
+                    ViewBag.Uritus = null;
+            }
+
+            return PartialView();
         }
 
         [HttpGet]
