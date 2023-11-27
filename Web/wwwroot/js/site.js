@@ -51,10 +51,10 @@ function _notEmpty(input) {
 
 function _emptyUritusForm() {
 
-    $("input#urituse-nimetus").val("");
-    $("input#urituse-toimumisaeg").val("");
-    $("input#urituse-toimumisekoht").val("");
-    $("textarea#urituse-lisainfo").val("");
+    $("input#uritus-nimetus").val("");
+    $("input#uritus-toimumisaeg").val("");
+    $("input#uritus-toimumisekoht").val("");
+    $("textarea#uritus-lisainfo").val("");
     $("form#uus-uritus").removeClass("was-validated");
 }
 
@@ -87,7 +87,7 @@ function StartUp() {
 
     var date = now.getFullYear() + "/" + (month < 10 ? "0" : "") + month + "/" + (day < 10 ? "0" : "") + day;
 
-    $("input#urituse-toimumisaeg").datetimepicker({
+    $("input#uritus-toimumisaeg").datetimepicker({
         format: "d.m.Y H:i",
         minDate: date
     });
@@ -135,11 +135,11 @@ function _validateUritus() {
 
     var isValid = true;
 
-    isValid = isValid && _notEmpty($("input#urituse-nimetus"));
+    isValid = isValid && _notEmpty($("input#uritus-nimetus"));
 
-    isValid = isValid && _notEmpty($("input#urituse-toimumisaeg"));
+    isValid = isValid && _notEmpty($("input#uritus-toimumisaeg"));
 
-    isValid = isValid && _notEmpty($("input#urituse-toimumisekoht"));
+    isValid = isValid && _notEmpty($("input#uritus-toimumisekoht"));
 
     return isValid;
 }

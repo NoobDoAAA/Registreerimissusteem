@@ -26,3 +26,53 @@
         </div>
     </div>
 </div>
+
+<!-- Eraisikute Lisamine Modal -->
+
+<div class="modal fade" id="eraisik-add-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="eraisik-add-modal-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="eraisik-add-modal-title">Eraisikute Lisamine</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <partial name="_UusEraisik.cshtml" />
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Katkesta</button>
+                <button type="button" class="btn btn-success" onclick="LisaEraisik()">
+                    <span class="spinner-border spinner-border-sm d-none" id="eraisik-add-modal-spinner" role="status" aria-hidden="true"></span>
+                    Lisa Eraisik
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Ettevõte Lisamine Modal -->
+
+<div class="modal fade" id="ettevote-add-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ettevote-add-modal-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="ettevote-add-modal-title">Ettevõte Lisamine</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <partial name="_UusEttevote.cshtml" />
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Katkesta</button>
+                <button type="button" class="btn btn-success" onclick="LisaEttevote()">
+                    <span class="spinner-border spinner-border-sm d-none" id="ettevote-add-modal-spinner" role="status" aria-hidden="true"></span>
+                    Lisa Ettevõte
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

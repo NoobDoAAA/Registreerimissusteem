@@ -1,0 +1,51 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<form id="uus-eraisik">
+
+    <div class="mb-3">
+        <label for="eraisik-eesnimi" class="form-label">Eesnimi:</label>
+        <input type="text" class="form-control" id="eraisik-eesnimi" name="Eesnimi" value="" minlength="3" maxlength="50" required />
+        <div class="invalid-feedback">
+            Peaks olema Eesnimi!
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="eraisik-perekonnanimi" class="form-label">Perekonnanimi:</label>
+        <input type="text" class="form-control" id="eraisik-perekonnanimi" name="Perekonnanimi" value="" minlength="3" maxlength="50" required />
+        <div class="invalid-feedback">
+            Peaks olema Perekonnanimi!
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="eraisik-isikukood" class="form-label">Isikukood:</label>
+        <input type="text" class="form-control" id="eraisik-isikukood" name="Isikukood" value="" minlength="11" maxlength="11" required />
+        <div class="invalid-feedback">
+            Peaks olema Isikukood!
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="eraisik-makseviis" class="form-label">Makseviis:</label>
+        <select class="form-select" id="eraisik-makseviis" name="MakseviisId" required>
+
+            @foreach (var item in ViewBag.Makseviisid)
+            {
+                <option value="@item.Id">@item.Nimi</option>
+            }
+
+        </select>
+        <div class="invalid-feedback">
+            Peaks olema Makseviis!
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="eraisik-lisainfo" class="form-label">Lisainfo:</label>
+        <textarea class="form-control" id="eraisik-lisainfo" rows="5" name="Lisainfo" maxlength="1500"></textarea>
+    </div>
+
+</form>

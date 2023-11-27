@@ -293,7 +293,9 @@ namespace DataAccessLayer.Logic
             return true;
         }
 
-
+        /// <summary>
+        /// Lisa ettevote osaleja
+        /// </summary>
         public async Task<bool> LisaEttevoteOsaleja(EttevoteOsalejaDto? ettevote_osaleja)
         {
             if (ettevote_osaleja == null) return false;

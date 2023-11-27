@@ -85,6 +85,12 @@ header {
   border: 1px solid #dee2e6;
 }
 
+.uritus-btn {
+  font-size: 1.2rem;
+  margin: 0 0.35rem;
+  padding: 0.75rem;
+}
+
 .tab-pane-content {
   background-color: #fff;
   border-left: 1px solid #dee2e6;

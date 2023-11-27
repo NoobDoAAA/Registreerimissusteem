@@ -7,7 +7,7 @@
         public string EttevoteNimi { get; set; }
         public string Registrikood { get; set; }
         public int MakseviisId { get; set; }
-        public string Makseviis { get; set; }
+        public string? Makseviis { get; set; }
         public int OsavotjateArv { get; set; }
         public string? Lisainfo { get; set; }
     }

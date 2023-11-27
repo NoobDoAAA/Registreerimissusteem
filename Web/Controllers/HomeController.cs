@@ -81,12 +81,31 @@ namespace Web.Controllers
 
                 uritus.Wait();
 
-                if (uritus.Result != null) ViewBag.Uritus = Mapper.MappIt<UritusViewModel>(uritus.Result);
+                if (uritus.Result != null)
+                {
+                    ViewBag.Uritus = Mapper.MappIt<UritusViewModel>(uritus.Result);
+
+                    var eraisikud = handler.GetEraisikOsalejad(Id);
+
+                    eraisikud.Wait();
+
+                    ViewBag.Eraisikud = eraisikud.Result.Select(Mapper.MappIt<EraisikOsalejaViewModel>).ToList();
+
+                    var ettevoted = handler.GetEttevoteOsalejad(Id);
+
+                    ettevoted.Wait();
+
+                    ViewBag.Ettevoted = ettevoted.Result.Select(Mapper.MappIt<EttevoteOsalejaViewModel>).ToList();
+
+                    var makseviisid = handler.GetMakseviisid();
+
+                    makseviisid.Wait();
+
+                    ViewBag.Makseviisid = makseviisid.Result.Select(Mapper.MappIt<MakseviisViewModel>).ToList();
+                }
                 else
                     ViewBag.Uritus = null;
             }
-
-
 
             return View("Uritus");
         }
@@ -155,6 +174,8 @@ namespace Web.Controllers
 
             return PartialView();
         }
+
+
 
         [HttpGet]
         public IActionResult Privacy()

@@ -11,7 +11,7 @@ namespace DataAccessLayer
         public DbSet<Ettevote> Ettevote { get; set; }
         public DbSet<Makseviis> Makseviis { get; set; }
 
-        public DbSet<EraisikOsaleja> EraisikOsaleja { get; }
-        public DbSet<EttevoteOsaleja> EttevoteOsaleja { get; }
+        public DbSet<EraisikOsaleja> EraisikOsaleja { get; set; }
+        public DbSet<EttevoteOsaleja> EttevoteOsaleja { get; set; }
     }
 }
