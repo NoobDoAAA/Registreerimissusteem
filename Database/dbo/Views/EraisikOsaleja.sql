@@ -1,6 +1,7 @@
 ﻿CREATE VIEW [dbo].[EraisikOsaleja] 
 	AS 
 	SELECT 
+	dbo.Osaleja.Id, 
 	dbo.Eraisik.Eesnimi, 
 	dbo.Eraisik.Perekonnanimi, 
 	dbo.Eraisik.Isikukood, 

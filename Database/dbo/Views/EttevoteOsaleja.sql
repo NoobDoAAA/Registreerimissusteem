@@ -1,6 +1,7 @@
 ﻿CREATE VIEW [dbo].[EttevoteOsaleja] 
 	AS 
 	SELECT 
+	dbo.Osaleja.Id, 
 	dbo.Ettevote.Nimi AS EttevoteNimi, 
 	dbo.Ettevote.Registrikood, 
 	dbo.Makseviis.Nimi AS Makseviis, 

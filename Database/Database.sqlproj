@@ -76,4 +76,7 @@
     <Build Include="dbo\Views\EraisikOsaleja.sql" />
     <Build Include="dbo\Views\EttevoteOsaleja.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="PostDeploymentScripts\Script.Makseviisid.sql" />
+  </ItemGroup>
 </Project>
