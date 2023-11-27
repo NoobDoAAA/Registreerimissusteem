@@ -2,8 +2,10 @@
 	AS 
 	SELECT 
 	dbo.Osaleja.Id, 
+	dbo.Osaleja.UritusId, 
 	dbo.Ettevote.Nimi AS EttevoteNimi, 
-	dbo.Ettevote.Registrikood, 
+	dbo.Ettevote.Registrikood,
+	dbo.Makseviis.Id AS MakseviisId, 
 	dbo.Makseviis.Nimi AS Makseviis, 
 	dbo.Osaleja.OsavotjateArv, 
 	dbo.Osaleja.Lisainfo 

@@ -2,9 +2,11 @@
 	AS 
 	SELECT 
 	dbo.Osaleja.Id, 
+	dbo.Osaleja.UritusId, 
 	dbo.Eraisik.Eesnimi, 
 	dbo.Eraisik.Perekonnanimi, 
 	dbo.Eraisik.Isikukood, 
+	dbo.Makseviis.Id AS MakseviisId, 
 	dbo.Makseviis.Nimi AS Makseviis, 
 	dbo.Osaleja.Lisainfo 
 	FROM dbo.Osaleja 

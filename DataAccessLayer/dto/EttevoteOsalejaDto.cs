@@ -1,10 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DataAccessLayer.Interfaces;
 
-namespace DataAccessLayer.ModelsDb
+namespace DataAccessLayer.dto
 {
-    public class EttevoteOsaleja
+    public class EttevoteOsalejaDto : IEttevoteOsaleja
     {
-        [Key]
         public int Id { get; set; }
         public int UritusId { get; set; }
         public required string EttevoteNimi { get; set; }
