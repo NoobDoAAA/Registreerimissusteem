@@ -175,7 +175,52 @@ namespace Web.Controllers
             return PartialView();
         }
 
+        [HttpPost]
+        public JsonResult LisaEraisik(EraisikOsalejaViewModel eraisik)
+        {
+            if (ModelState.IsValid)
+            {
+                using (UritusHandler handler = new(_context))
+                {
+                    var query = handler.LisaEraisikOsaleja(Mapper.MappIt<EraisikOsalejaDto>(eraisik));
 
+                    query.Wait();
+
+                    return Json(new
+                    {
+                        tehtud = true
+                    });
+                }
+            }
+
+            return Json(new
+            {
+                tehtud = false
+            });
+        }
+
+
+
+        [HttpPost]
+        public IActionResult UrituseOsalejad(int Id)
+        {
+            using (UritusHandler handler = new(_context))
+            {
+                var eraisikud = handler.GetEraisikOsalejad(Id);
+
+                eraisikud.Wait();
+
+                ViewBag.Eraisikud = eraisikud.Result.Select(Mapper.MappIt<EraisikOsalejaViewModel>).ToList();
+
+                var ettevoted = handler.GetEttevoteOsalejad(Id);
+
+                ettevoted.Wait();
+
+                ViewBag.Ettevoted = ettevoted.Result.Select(Mapper.MappIt<EttevoteOsalejaViewModel>).ToList();
+            }
+
+            return PartialView();
+        }
 
         [HttpGet]
         public IActionResult Privacy()

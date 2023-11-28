@@ -49,6 +49,27 @@ function _notEmpty(input) {
 }
 
 
+function _validIdCode(input, form) {
+
+    if (_notEmpty(input)) {
+
+        if (_verifyIdCode(input.val())) {
+
+            $("div#" + input.attr("id") + "-invalid-feedback").html("Peaks olema Isikukood!");
+            input.removeClass("is-invalid");
+            return true;
+        }
+        else {
+
+            $("div#" + input.attr("id") + "-invalid-feedback").html("Isikukood on vale, palun kontrollige seda uuesti.");
+            input.addClass("is-invalid");
+            form.removeClass("was-validated");
+            return false;
+        }
+    }
+}
+
+
 function _emptyUritusForm() {
 
     $("input#uritus-nimetus").val("");
@@ -72,6 +93,15 @@ function _showUrituseAndmedLoader() {
 
     var loader = $("section#urituse-andmed-loader");
     var target = $("div#urituse-andmed");
+
+    target.html(loader.html());
+}
+
+
+function _showUrituseOsalejadLoader() {
+
+    var loader = $("section#urituse-osalejad-loader");
+    var target = $("div#urituse-osalejad");
 
     target.html(loader.html());
 }
@@ -220,3 +250,56 @@ function MuudaUritus() {
 }
 
 
+function _validateEraisik() {
+
+    if (!_validIdCode($("input#eraisik-isikukood"), $("form#uus-eraisik"))) return false;
+
+    var isValid = true;
+
+    isValid = isValid && _notEmpty($("input#eraisik-eesnimi"));
+
+    isValid = isValid && _notEmpty($("input#eraisik-perekonnanimi"));
+
+    isValid = isValid && _notEmpty($("select#eraisik-makseviis"));
+
+    return isValid;
+}
+
+
+function LisaEraisik() {
+
+    $("form#uus-eraisik").addClass("was-validated");
+
+    if (_validateEraisik()) {
+
+        var spinner = $("span#eraisik-add-modal-spinner");
+
+        spinner.removeClass("d-none");
+
+        $.post("/Home/LisaEraisik", $("form#uus-eraisik").serialize(),
+
+            function (response) {
+
+                if (response.tehtud) {
+
+                    setTimeout(function () {
+
+                        $("div#eraisik-add-modal").modal("hide");
+
+                        spinner.addClass("d-none");
+
+                        $("form#uus-eraisik").removeClass("was-validated");
+
+                        _showUrituseOsalejadLoader();
+
+                        var target = $("div#urituse-osalejad");
+                        var id = $("input#uus-eraisik-uritus-id").val();
+
+                        setTimeout(function () { target.load("/Home/UrituseOsalejad", { Id: id }); }, 1250);
+
+                    }, 850);
+                }
+
+            }, "json");
+    }
+}

@@ -275,6 +275,7 @@ namespace DataAccessLayer.Logic
             };
 
             var dbEraisik = await _dbContext.Eraisik.AddAsync(eraisik);
+            await _dbContext.SaveChangesAsync();
 
             Osaleja osaleja = new()
             {
@@ -308,6 +309,7 @@ namespace DataAccessLayer.Logic
             };
 
             var dbEttevote = await _dbContext.Ettevote.AddAsync(ettevote);
+            await _dbContext.SaveChangesAsync();
 
             Osaleja osaleja = new()
             {
