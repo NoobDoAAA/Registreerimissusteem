@@ -4,6 +4,7 @@
     {
         public int Id { get; set; }
         public int UritusId { get; set; }
+        public int EraisikId { get; set; }
         public string Eesnimi { get; set; }
         public string Perekonnanimi { get; set; }
         public string Isikukood { get; set; }

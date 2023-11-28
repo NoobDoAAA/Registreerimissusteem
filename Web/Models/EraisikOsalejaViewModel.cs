@@ -11,6 +11,9 @@ namespace Web.Models
         [ScaffoldColumn(false)]
         public int UritusId { get; set; }
 
+        [ScaffoldColumn(false)]
+        public int EraisikId { get; set; }
+
         [Required]
         [StringLength(50)]
         public required string Eesnimi { get; set; }

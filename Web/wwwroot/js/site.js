@@ -82,11 +82,23 @@ function _emptyUritusForm() {
 
 function _emptyUusEraisikForm() {
 
-    $("input#uus-eraisik-isikukood").val("");
     $("input#uus-eraisik-eesnimi").val("");
     $("input#uus-eraisik-perekonnanimi").val("");
+    $("input#uus-eraisik-isikukood").val("");
     $("select#uus-eraisik-makseviis").val("");
+    $("textarea#uus-eraisik-lisainfo").val("");
     $("form#uus-eraisik").removeClass("was-validated");
+}
+
+
+function _emptyUusEttevoteForm() {
+
+    $("input#uus-ettevote-nimi").val("");
+    $("input#uus-ettevote-registrikood").val("");
+    $("input#uus-ettevote-osavotjatearv").val("");
+    $("select#uus-ettevote-makseviis").val("");
+    $("textarea#uus-ettevote-lisainfo").val("");
+    $("form#uus-ettevote").removeClass("was-validated");
 }
 
 
@@ -296,7 +308,7 @@ function LisaEraisik() {
 
                         $("div#eraisik-add-modal").modal("hide");
 
-                        _emptyUusEraisikForm()
+                        _emptyUusEraisikForm();
 
                         spinner.addClass("d-none");
 
@@ -304,6 +316,61 @@ function LisaEraisik() {
 
                         var target = $("div#urituse-osalejad");
                         var id = $("input#uus-eraisik-uritus-id").val();
+
+                        setTimeout(function () { target.load("/Home/UrituseOsalejad", { Id: id }); }, 1250);
+
+                    }, 850);
+                }
+
+            }, "json");
+    }
+}
+
+
+function _validateEttevote() {
+
+    var isValid = true;
+
+    isValid = isValid && _notEmpty($("input#uus-ettevote-nimi"));
+
+    isValid = isValid && _notEmpty($("input#uus-ettevote-registrikood"));
+
+    isValid = isValid && _notEmpty($("input#uus-ettevote-osavotjatearv"));
+
+    isValid = isValid && _notEmpty($("select#uus-ettevote-makseviis"));
+
+    return isValid;
+}
+
+
+function LisaEttevote() {
+
+    $("form#uus-ettevote").addClass("was-validated");
+
+    if (_validateEttevote()) {
+
+        var spinner = $("span#ettevote-add-modal-spinner");
+
+        spinner.removeClass("d-none");
+
+        $.post("/Home/LisaEttevote", $("form#uus-ettevote").serialize(),
+
+            function (response) {
+
+                if (response.tehtud) {
+
+                    setTimeout(function () {
+
+                        $("div#ettevote-add-modal").modal("hide");
+
+                        _emptyUusEttevoteForm();
+
+                        spinner.addClass("d-none");
+
+                        _showUrituseOsalejadLoader();
+
+                        var target = $("div#urituse-osalejad");
+                        var id = $("input#uus-ettevote-uritus-id").val();
 
                         setTimeout(function () { target.load("/Home/UrituseOsalejad", { Id: id }); }, 1250);
 

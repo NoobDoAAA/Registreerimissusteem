@@ -33,6 +33,7 @@ body {
   font-family: "Ubuntu";
   background: #feefdc url(/img/bg.png) center -45px no-repeat;
   overflow: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 header {

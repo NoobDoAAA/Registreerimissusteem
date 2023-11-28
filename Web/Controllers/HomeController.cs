@@ -1,6 +1,7 @@
 using DataAccessLayer;
 using DataAccessLayer.dto;
 using DataAccessLayer.Logic;
+using DataAccessLayer.ModelsDb;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Web.Controllers.Helpers;
@@ -199,7 +200,29 @@ namespace Web.Controllers
             });
         }
 
+        [HttpPost]
+        public JsonResult LisaEttevote(EttevoteOsalejaViewModel ettevote)
+        {
+            if (ModelState.IsValid)
+            {
+                using (UritusHandler handler = new(_context))
+                {
+                    var query = handler.LisaEttevoteOsaleja(Mapper.MappIt<EttevoteOsalejaDto>(ettevote));
 
+                    query.Wait();
+
+                    return Json(new
+                    {
+                        tehtud = true
+                    });
+                }
+            }
+
+            return Json(new
+            {
+                tehtud = false
+            });
+        }
 
         [HttpPost]
         public IActionResult UrituseOsalejad(int Id)

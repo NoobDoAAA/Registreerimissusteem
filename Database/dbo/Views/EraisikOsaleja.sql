@@ -2,7 +2,8 @@
 	AS 
 	SELECT 
 	dbo.Osaleja.Id, 
-	dbo.Osaleja.UritusId, 
+	dbo.Osaleja.UritusId,
+	dbo.Osaleja.EraisikId,
 	dbo.Eraisik.Eesnimi, 
 	dbo.Eraisik.Perekonnanimi, 
 	dbo.Eraisik.Isikukood, 
@@ -13,4 +14,4 @@
 	LEFT JOIN dbo.Eraisik ON dbo.Osaleja.EraisikId = dbo.Eraisik.Id 
 	LEFT JOIN dbo.Makseviis ON dbo.Osaleja.MakseviisId = dbo.Makseviis.Id 
 	WHERE 
-	dbo.Osaleja.Kustutatud = 0 
+	dbo.Osaleja.Kustutatud = 0 AND dbo.Osaleja.EraisikId IS NOT NULL

@@ -8,5 +8,32 @@
 }
 else
 {
+    <table class="table table-striped">
 
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Eesnimi</th>
+                <th scope="col">Perekonnanimi</th>
+                <th scope="col">Isikukood</th>
+            </tr>
+        </thead>
+
+        @{
+            var i = 1;
+
+            foreach (var item in ViewBag.Eraisikud)
+            {
+                <tr>
+                    <td class="col-1">@i</td>
+                    <td class="col-2">@item.Eesnimi</td>
+                    <td class="col-2">@item.Perekonnanimi</td>
+                    <td class="col-2">@item.Isikukood</td>
+                </tr>
+
+                i++;
+            }
+        }
+
+    </table>
 }

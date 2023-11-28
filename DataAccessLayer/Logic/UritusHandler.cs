@@ -190,7 +190,7 @@ namespace DataAccessLayer.Logic
         /// </summary>
         public async Task<IList<IEraisikOsaleja>> GetEraisikOsalejad(int Id)
         {
-            var dbEraisikud = await GetAllEraisikOsalejad().Where(e => e.Id == Id).ToListAsync();
+            var dbEraisikud = await GetAllEraisikOsalejad().Where(e => e.UritusId == Id).ToListAsync();
 
             var result = new List<IEraisikOsaleja>();
 
@@ -200,11 +200,10 @@ namespace DataAccessLayer.Logic
                     item: new EraisikOsalejaDto
                     {
                         Id = e.Id,
+                        EraisikId = e.EraisikId,
                         Eesnimi = e.Eesnimi,
                         Perekonnanimi = e.Perekonnanimi,
-                        Isikukood = e.Isikukood,
-                        Makseviis = e.Makseviis,
-                        Lisainfo = e.Lisainfo
+                        Isikukood = e.Isikukood
                     });
             }
 
@@ -216,7 +215,7 @@ namespace DataAccessLayer.Logic
         /// </summary>
         public async Task<IList<IEttevoteOsaleja>> GetEttevoteOsalejad(int Id)
         {
-            var dbEttevoted = await GetAllEttevoteOsalejad().Where(e => e.Id == Id).ToListAsync();
+            var dbEttevoted = await GetAllEttevoteOsalejad().Where(e => e.UritusId == Id).ToListAsync();
 
             var result = new List<IEttevoteOsaleja>();
 
@@ -226,11 +225,10 @@ namespace DataAccessLayer.Logic
                     item: new EttevoteOsalejaDto
                     {
                         Id = e.Id,
+                        EttevoteId = e.EttevoteId,
                         EttevoteNimi = e.EttevoteNimi,
                         Registrikood = e.Registrikood,
-                        Makseviis = e.Makseviis,
-                        OsavotjateArv = e.OsavotjateArv,
-                        Lisainfo = e.Lisainfo
+                        OsavotjateArv = e.OsavotjateArv
                     });
             }
 

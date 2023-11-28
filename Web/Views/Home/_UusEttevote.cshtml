@@ -4,34 +4,36 @@
 
 <form id="uus-ettevote">
 
+    <input type="hidden" id="uus-ettevote-uritus-id" name="UritusId" value="@ViewBag.Uritus.Id">
+
     <div class="mb-3">
-        <label for="ettevote-nimi" class="form-label">Ettevõtte juriidiline nimi:</label>
-        <input type="text" class="form-control" id="ettevote-nimi" name="EttevoteNimi" value="" minlength="3" maxlength="50" required />
+        <label for="uus-ettevote-nimi" class="form-label">Ettevõtte juriidiline nimi:</label>
+        <input type="text" class="form-control" id="uus-ettevote-nimi" name="EttevoteNimi" value="" minlength="3" maxlength="50" required />
         <div class="invalid-feedback">
             Peaks olema Ettevõtte juriidiline nimi!
         </div>
     </div>
 
     <div class="mb-3">
-        <label for="ettevote-registrikood" class="form-label">Ettevõtte registrikood:</label>
-        <input type="text" class="form-control" id="ettevote-registrikood" name="Registrikood" value="" minlength="3" maxlength="50" required />
+        <label for="uus-ettevote-registrikood" class="form-label">Ettevõtte registrikood:</label>
+        <input type="text" class="form-control" id="uus-ettevote-registrikood" name="Registrikood" value="" minlength="3" maxlength="50" required />
         <div class="invalid-feedback">
             Peaks olema Ettevõtte registrikood!
         </div>
     </div>
 
     <div class="mb-3">
-        <label for="ettevote-osavotjatearv" class="form-label">Ettevõttest tulevate osavõtjate arv:</label>
-        <input type="text" class="form-control" id="ettevote-osavotjatearv" name="OsavotjateArv" value="" maxlength="7" required />
+        <label for="uus-ettevote-osavotjatearv" class="form-label">Ettevõttest tulevate osavõtjate arv:</label>
+        <input type="text" class="form-control" id="uus-ettevote-osavotjatearv" name="OsavotjateArv" value="" maxlength="7" required />
         <div class="invalid-feedback">
             Peaks olema Ettevõttest tulevate osavõtjate arv!
         </div>
     </div>
 
     <div class="mb-3">
-        <label for="ettevote-makseviis" class="form-label">Makseviis:</label>
-        <select class="form-select" id="ettevote-makseviis" name="MakseviisId" required>
-
+        <label for="uus-ettevote-makseviis" class="form-label">Makseviis:</label>
+        <select class="form-select" id="uus-ettevote-makseviis" name="MakseviisId" required>
+            <option value="" selected> --- Valige Makseviis --- </option>
             @foreach (var item in ViewBag.Makseviisid)
             {
                 <option value="@item.Id">@item.Nimi</option>
@@ -44,8 +46,8 @@
     </div>
 
     <div class="mb-3">
-        <label for="ettevote-lisainfo" class="form-label">Lisainfo:</label>
-        <textarea class="form-control" id="ettevote-lisainfo" rows="5" name="Lisainfo" maxlength="5000"></textarea>
+        <label for="uus-ettevote-lisainfo" class="form-label">Lisainfo:</label>
+        <textarea class="form-control" id="uus-ettevote-lisainfo" rows="5" name="Lisainfo" maxlength="5000"></textarea>
     </div>
 
 </form>

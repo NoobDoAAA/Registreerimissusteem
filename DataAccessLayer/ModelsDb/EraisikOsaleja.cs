@@ -7,6 +7,7 @@ namespace DataAccessLayer.ModelsDb
         [Key]
         public int Id { get; set; }
         public int UritusId { get; set; }
+        public int EraisikId { get; set; }
         public required string Eesnimi { get; set; }
         public required string Perekonnanimi { get; set; }
         public required string Isikukood { get; set; }
