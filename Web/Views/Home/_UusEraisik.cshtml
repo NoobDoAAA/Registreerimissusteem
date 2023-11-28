@@ -7,32 +7,32 @@
     <input type="hidden" id="uus-eraisik-uritus-id" name="UritusId" value="@ViewBag.Uritus.Id">
 
     <div class="mb-3">
-        <label for="eraisik-eesnimi" class="form-label">Eesnimi:</label>
-        <input type="text" class="form-control" id="eraisik-eesnimi" name="Eesnimi" value="" minlength="3" maxlength="50" required />
+        <label for="uus-eraisik-eesnimi" class="form-label">Eesnimi:</label>
+        <input type="text" class="form-control" id="uus-eraisik-eesnimi" name="Eesnimi" value="" minlength="3" maxlength="50" required />
         <div class="invalid-feedback">
             Peaks olema Eesnimi!
         </div>
     </div>
 
     <div class="mb-3">
-        <label for="eraisik-perekonnanimi" class="form-label">Perekonnanimi:</label>
-        <input type="text" class="form-control" id="eraisik-perekonnanimi" name="Perekonnanimi" value="" minlength="3" maxlength="50" required />
+        <label for="uus-eraisik-perekonnanimi" class="form-label">Perekonnanimi:</label>
+        <input type="text" class="form-control" id="uus-eraisik-perekonnanimi" name="Perekonnanimi" value="" minlength="3" maxlength="50" required />
         <div class="invalid-feedback">
             Peaks olema Perekonnanimi!
         </div>
     </div>
 
     <div class="mb-3">
-        <label for="eraisik-isikukood" class="form-label">Isikukood:</label>
-        <input type="text" class="form-control" id="eraisik-isikukood" name="Isikukood" value="" minlength="11" maxlength="11" required />
-        <div class="invalid-feedback" id="eraisik-isikukood-invalid-feedback">
+        <label for="uus-eraisik-isikukood" class="form-label">Isikukood:</label>
+        <input type="text" class="form-control" id="uus-eraisik-isikukood" name="Isikukood" value="" minlength="11" maxlength="11" required />
+        <div class="invalid-feedback" id="uus-eraisik-isikukood-invalid-feedback">
             Peaks olema Isikukood!
         </div>
     </div>
 
     <div class="mb-3">
-        <label for="eraisik-makseviis" class="form-label">Makseviis:</label>
-        <select class="form-select" id="eraisik-makseviis" name="MakseviisId" required>
+        <label for="uus-eraisik-makseviis" class="form-label">Makseviis:</label>
+        <select class="form-select" id="uus-eraisik-makseviis" name="MakseviisId" required>
             <option value="" selected> --- Valige Makseviis --- </option>
             @foreach (var item in ViewBag.Makseviisid)
             {
@@ -46,8 +46,8 @@
     </div>
 
     <div class="mb-3">
-        <label for="eraisik-lisainfo" class="form-label">Lisainfo:</label>
-        <textarea class="form-control" id="eraisik-lisainfo" rows="5" name="Lisainfo" maxlength="1500"></textarea>
+        <label for="uus-eraisik-lisainfo" class="form-label">Lisainfo:</label>
+        <textarea class="form-control" id="uus-eraisik-lisainfo" rows="5" name="Lisainfo" maxlength="1500"></textarea>
     </div>
 
 </form>

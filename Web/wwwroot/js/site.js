@@ -80,6 +80,16 @@ function _emptyUritusForm() {
 }
 
 
+function _emptyUusEraisikForm() {
+
+    $("input#uus-eraisik-isikukood").val("");
+    $("input#uus-eraisik-eesnimi").val("");
+    $("input#uus-eraisik-perekonnanimi").val("");
+    $("select#uus-eraisik-makseviis").val("");
+    $("form#uus-eraisik").removeClass("was-validated");
+}
+
+
 function _showPlaneeritudUritusedLoader() {
 
     var loader = $("section#uritused-loader");
@@ -252,15 +262,15 @@ function MuudaUritus() {
 
 function _validateEraisik() {
 
-    if (!_validIdCode($("input#eraisik-isikukood"), $("form#uus-eraisik"))) return false;
+    if (!_validIdCode($("input#uus-eraisik-isikukood"), $("form#uus-eraisik"))) return false;
 
     var isValid = true;
 
-    isValid = isValid && _notEmpty($("input#eraisik-eesnimi"));
+    isValid = isValid && _notEmpty($("input#uus-eraisik-eesnimi"));
 
-    isValid = isValid && _notEmpty($("input#eraisik-perekonnanimi"));
+    isValid = isValid && _notEmpty($("input#uus-eraisik-perekonnanimi"));
 
-    isValid = isValid && _notEmpty($("select#eraisik-makseviis"));
+    isValid = isValid && _notEmpty($("select#uus-eraisik-makseviis"));
 
     return isValid;
 }
@@ -286,9 +296,9 @@ function LisaEraisik() {
 
                         $("div#eraisik-add-modal").modal("hide");
 
-                        spinner.addClass("d-none");
+                        _emptyUusEraisikForm()
 
-                        $("form#uus-eraisik").removeClass("was-validated");
+                        spinner.addClass("d-none");
 
                         _showUrituseOsalejadLoader();
 
