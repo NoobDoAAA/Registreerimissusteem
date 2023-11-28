@@ -16,6 +16,7 @@ else
                 <th scope="col">Eesnimi</th>
                 <th scope="col">Perekonnanimi</th>
                 <th scope="col">Isikukood</th>
+                <th scope="col"></th>
             </tr>
         </thead>
 
@@ -28,7 +29,11 @@ else
                     <td class="col-1">@i</td>
                     <td class="col-2">@item.Eesnimi</td>
                     <td class="col-2">@item.Perekonnanimi</td>
-                    <td class="col-2">@item.Isikukood</td>
+                    <td class="col-1">@item.Isikukood</td>
+                    <td class="col-1">
+                        <span class="action-link">Eemalda</span>
+                        <span class="action-link">Muuda</span>
+                    </td>
                 </tr>
 
                 i++;

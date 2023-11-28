@@ -7,7 +7,7 @@ $.datetimepicker.setLocale("et");
 
 // Eesti isikukoodi valideerimine:
 //
-function _verifyIdCode(idCode) {
+function _verifyIsikukood(idCode) {
 
     if (idCode == "" || idCode.length != 11) return false;
 
@@ -37,9 +37,7 @@ function _verifyIdCode(idCode) {
 
 function _visit(url) {
 
-    $("div#main-loader").fadeIn(350, function () {
-        location.href = url;
-    });
+    location.href = url;
 }
 
 
@@ -49,23 +47,53 @@ function _notEmpty(input) {
 }
 
 
+function _setInvalidIdCode(input, form) {
+
+    input.addClass("is-invalid");
+    form.removeClass("was-validated");
+    $("div#" + input.attr("id") + "-invalid-feedback").html("Isikukood on vale, palun kontrollige seda uuesti.");
+}
+
+
 function _validIdCode(input, form) {
 
     if (_notEmpty(input)) {
 
-        if (_verifyIdCode(input.val())) {
+        if (!input.val().match(/^\d+$/)) {
 
-            $("div#" + input.attr("id") + "-invalid-feedback").html("Peaks olema Isikukood!");
-            input.removeClass("is-invalid");
-            return true;
-        }
-        else {
-
-            $("div#" + input.attr("id") + "-invalid-feedback").html("Isikukood on vale, palun kontrollige seda uuesti.");
-            input.addClass("is-invalid");
-            form.removeClass("was-validated");
+            _setInvalidIdCode(input, form);
             return false;
         }
+        else {
+            if (_verifyIsikukood(input.val())) {
+
+                $("div#" + input.attr("id") + "-invalid-feedback").html("Peaks olema Isikukood!");
+                input.removeClass("is-invalid");
+                return true;
+            }
+            else {
+
+                _setInvalidIdCode(input, form);
+                return false;
+            }
+        }
+    }
+}
+
+
+function _validOsavotjateArv(input, form) {
+
+    if (input.val().match(/^\d+$/)) {
+
+        $("div#" + input.attr("id") + "-invalid-feedback").html("Peaks olema Ettevõttest tulevate osavõtjate arv!");
+        input.removeClass("is-invalid");
+        return true;
+    }
+    else {
+
+        input.addClass("is-invalid");
+        form.removeClass("was-validated");
+        $("div#" + input.attr("id") + "-invalid-feedback").html("Ettevõttest tulevate osavõtjate arv on vale, palun kontrollige seda uuesti.");
     }
 }
 
@@ -188,9 +216,7 @@ function _validateUritus() {
     var isValid = true;
 
     isValid = isValid && _notEmpty($("input#uritus-nimetus"));
-
     isValid = isValid && _notEmpty($("input#uritus-toimumisaeg"));
-
     isValid = isValid && _notEmpty($("input#uritus-toimumisekoht"));
 
     return isValid;
@@ -199,7 +225,9 @@ function _validateUritus() {
 
 function LisaUritus() {
 
-    $("form#uus-uritus").addClass("was-validated");
+    var form = $("form#uus-uritus");
+
+    form.addClass("was-validated");
 
     if (_validateUritus()) {
 
@@ -207,7 +235,7 @@ function LisaUritus() {
 
         spinner.removeClass("d-none");
 
-        $.post("/Home/LisaUritus", $("form#uus-uritus").serialize(),
+        $.post("/Home/LisaUritus", form.serialize(),
             function (response) {
 
                 if (response.tehtud) {
@@ -215,11 +243,9 @@ function LisaUritus() {
                     setTimeout(function () {
 
                         $("div#uritus-add-modal").modal("hide");
-
-                        _emptyUritusForm();
-
                         spinner.addClass("d-none");
 
+                        _emptyUritusForm();
                         _showPlaneeritudUritusedLoader();
 
                         var target = $("div#planeeritud-uritused");
@@ -228,7 +254,6 @@ function LisaUritus() {
 
                     }, 850);
                 }
-
             }, "json");
     }
 }
@@ -236,7 +261,9 @@ function LisaUritus() {
 
 function MuudaUritus() {
 
-    $("form#muuda-uritus").addClass("was-validated");
+    var form = $("form#muuda-uritus");
+
+    form.addClass("was-validated");
 
     if (_validateUritus()) {
 
@@ -244,7 +271,7 @@ function MuudaUritus() {
 
         spinner.removeClass("d-none");
 
-        $.post("/Home/MuudaUritus", $("form#muuda-uritus").serialize(),
+        $.post("/Home/MuudaUritus", form.serialize(),
             function (response) {
 
                 if (response.tehtud) {
@@ -252,10 +279,8 @@ function MuudaUritus() {
                     setTimeout(function () {
 
                         $("div#uritus-edit-modal").modal("hide");
-
+                        form.removeClass("was-validated");
                         spinner.addClass("d-none");
-
-                        $("form#muuda-uritus").removeClass("was-validated");
 
                         _showUrituseAndmedLoader();
 
@@ -266,7 +291,6 @@ function MuudaUritus() {
 
                     }, 850);
                 }
-
             }, "json");
     }
 }
@@ -279,9 +303,7 @@ function _validateEraisik() {
     var isValid = true;
 
     isValid = isValid && _notEmpty($("input#uus-eraisik-eesnimi"));
-
     isValid = isValid && _notEmpty($("input#uus-eraisik-perekonnanimi"));
-
     isValid = isValid && _notEmpty($("select#uus-eraisik-makseviis"));
 
     return isValid;
@@ -290,7 +312,9 @@ function _validateEraisik() {
 
 function LisaEraisik() {
 
-    $("form#uus-eraisik").addClass("was-validated");
+    var form = $("form#uus-eraisik");
+
+    form.addClass("was-validated");
 
     if (_validateEraisik()) {
 
@@ -298,7 +322,7 @@ function LisaEraisik() {
 
         spinner.removeClass("d-none");
 
-        $.post("/Home/LisaEraisik", $("form#uus-eraisik").serialize(),
+        $.post("/Home/LisaEraisik", form.serialize(),
 
             function (response) {
 
@@ -307,11 +331,9 @@ function LisaEraisik() {
                     setTimeout(function () {
 
                         $("div#eraisik-add-modal").modal("hide");
-
-                        _emptyUusEraisikForm();
-
                         spinner.addClass("d-none");
 
+                        _emptyUusEraisikForm();
                         _showUrituseOsalejadLoader();
 
                         var target = $("div#urituse-osalejad");
@@ -321,7 +343,6 @@ function LisaEraisik() {
 
                     }, 850);
                 }
-
             }, "json");
     }
 }
@@ -329,14 +350,12 @@ function LisaEraisik() {
 
 function _validateEttevote() {
 
+    if (!_validOsavotjateArv($("input#uus-ettevote-osavotjatearv"), $("form#uus-ettevote"))) return false;
+
     var isValid = true;
 
     isValid = isValid && _notEmpty($("input#uus-ettevote-nimi"));
-
     isValid = isValid && _notEmpty($("input#uus-ettevote-registrikood"));
-
-    isValid = isValid && _notEmpty($("input#uus-ettevote-osavotjatearv"));
-
     isValid = isValid && _notEmpty($("select#uus-ettevote-makseviis"));
 
     return isValid;
@@ -345,7 +364,9 @@ function _validateEttevote() {
 
 function LisaEttevote() {
 
-    $("form#uus-ettevote").addClass("was-validated");
+    var form = $("form#uus-ettevote");
+
+    form.addClass("was-validated");
 
     if (_validateEttevote()) {
 
@@ -353,7 +374,7 @@ function LisaEttevote() {
 
         spinner.removeClass("d-none");
 
-        $.post("/Home/LisaEttevote", $("form#uus-ettevote").serialize(),
+        $.post("/Home/LisaEttevote", form.serialize(),
 
             function (response) {
 
@@ -362,11 +383,9 @@ function LisaEttevote() {
                     setTimeout(function () {
 
                         $("div#ettevote-add-modal").modal("hide");
-
-                        _emptyUusEttevoteForm();
-
                         spinner.addClass("d-none");
 
+                        _emptyUusEttevoteForm();
                         _showUrituseOsalejadLoader();
 
                         var target = $("div#urituse-osalejad");
@@ -376,7 +395,6 @@ function LisaEttevote() {
 
                     }, 850);
                 }
-
             }, "json");
     }
 }
