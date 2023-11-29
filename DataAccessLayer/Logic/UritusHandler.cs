@@ -1,6 +1,6 @@
 ﻿using DataAccessLayer.dto;
-using DataAccessLayer.Interfaces;
 using DataAccessLayer.ModelsDb;
+using DataAccessLayer.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Logic
@@ -206,9 +206,9 @@ namespace DataAccessLayer.Logic
         /// <summary>
         /// Eraisik osalejad
         /// </summary>
-        public async Task<IList<IEraisikOsaleja>> GetEraisikOsalejad(int Id)
+        public async Task<IList<IEraisikOsaleja>> GetEraisikOsalejad(int UritusId)
         {
-            var dbEraisikud = await GetAllEraisikOsalejad().Where(e => e.UritusId == Id).ToListAsync();
+            var dbEraisikud = await GetAllEraisikOsalejad().Where(e => e.UritusId == UritusId).ToListAsync();
 
             var result = new List<IEraisikOsaleja>();
 
@@ -231,9 +231,9 @@ namespace DataAccessLayer.Logic
         /// <summary>
         /// Ettevote osalejad
         /// </summary>
-        public async Task<IList<IEttevoteOsaleja>> GetEttevoteOsalejad(int Id)
+        public async Task<IList<IEttevoteOsaleja>> GetEttevoteOsalejad(int UritusId)
         {
-            var dbEttevoted = await GetAllEttevoteOsalejad().Where(e => e.UritusId == Id).ToListAsync();
+            var dbEttevoted = await GetAllEttevoteOsalejad().Where(e => e.UritusId == UritusId).ToListAsync();
 
             var result = new List<IEttevoteOsaleja>();
 
@@ -369,6 +369,108 @@ namespace DataAccessLayer.Logic
             if (dbOsaleja == null) return false;
 
             dbOsaleja.Kustutatud = true;
+
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }
+
+        /// <summary>
+        /// Eraisik osaleja
+        /// </summary>
+        public async Task<IEraisikOsaleja?> GetEraisikOsaleja(int Id)
+        {
+            var dbOsaleja = await _dbContext.Osaleja.FindAsync(Id);
+
+            if (dbOsaleja == null) return null;
+
+            var dbEraisik = await _dbContext.Eraisik.FindAsync(dbOsaleja.EraisikId);
+
+            if (dbEraisik == null) return null;
+
+            return new EraisikOsalejaDto
+            {
+                Id = dbOsaleja.Id,
+                EraisikId = dbEraisik.Id,
+                Eesnimi = dbEraisik.Eesnimi,
+                Perekonnanimi = dbEraisik.Perekonnanimi,
+                Isikukood = dbEraisik.Isikukood,
+                MakseviisId = dbOsaleja.MakseviisId,
+                Lisainfo = dbOsaleja.Lisainfo
+            };
+        }
+
+        /// <summary>
+        /// Muuda eraisik
+        /// </summary>
+        public async Task<bool> MuudaEraisikOsaleja(EraisikOsalejaDto? eraisik_osaleja)
+        {
+            if (eraisik_osaleja == null) return false;
+
+            var dbOsaleja = await _dbContext.Osaleja.FindAsync(eraisik_osaleja.Id);
+
+            if (dbOsaleja == null) return false;
+
+            var dbEraisik = await _dbContext.Eraisik.FindAsync(eraisik_osaleja.EraisikId);
+
+            if (dbEraisik == null) return false;
+
+            dbEraisik.Eesnimi = eraisik_osaleja.Eesnimi;
+            dbEraisik.Perekonnanimi = eraisik_osaleja.Perekonnanimi;
+            dbEraisik.Isikukood = eraisik_osaleja.Isikukood;
+
+            dbOsaleja.MakseviisId = eraisik_osaleja.MakseviisId;
+            dbOsaleja.Lisainfo = eraisik_osaleja.Lisainfo;
+
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }
+
+        /// <summary>
+        /// Ettevote osaleja
+        /// </summary>
+        public async Task<IEttevoteOsaleja?> GetEttevoteOsaleja(int Id)
+        {
+            var dbOsaleja = await _dbContext.Osaleja.FindAsync(Id);
+
+            if (dbOsaleja == null) return null;
+
+            var dbEttevote = await _dbContext.Ettevote.FindAsync(dbOsaleja.EttevoteId);
+
+            if (dbEttevote == null) return null;
+
+            return new EttevoteOsalejaDto
+            {
+                Id = dbOsaleja.Id,
+                EttevoteId = dbEttevote.Id,
+                EttevoteNimi = dbEttevote.Nimi,
+                Registrikood = dbEttevote.Registrikood,
+                OsavotjateArv = dbOsaleja.OsavotjateArv,
+                MakseviisId = dbOsaleja.MakseviisId,
+                Lisainfo = dbOsaleja.Lisainfo
+            };
+        }
+
+        /// <summary>
+        /// Muuda ettevote
+        /// </summary>
+        public async Task<bool> MuudaEttevoteOsaleja(EttevoteOsalejaDto? ettevote_osaleja)
+        {
+            if (ettevote_osaleja == null) return false;
+
+            var dbOsaleja = await _dbContext.Osaleja.FindAsync(ettevote_osaleja.Id);
+
+            if (dbOsaleja == null) return false;
+
+            var dbEttevote = await _dbContext.Ettevote.FindAsync(ettevote_osaleja.EttevoteId);
+
+            if (dbEttevote == null) return false;
+
+            dbEttevote.Nimi = ettevote_osaleja.EttevoteNimi;
+            dbEttevote.Registrikood = ettevote_osaleja.Registrikood;
+
+            dbOsaleja.OsavotjateArv = ettevote_osaleja.OsavotjateArv;
+            dbOsaleja.MakseviisId = ettevote_osaleja.MakseviisId;
+            dbOsaleja.Lisainfo = ettevote_osaleja.Lisainfo;
 
             await _dbContext.SaveChangesAsync();
             return true;

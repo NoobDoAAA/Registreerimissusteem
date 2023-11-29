@@ -2,4 +2,59 @@
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
-...
+<form id="eraisik-edit">
+
+    <input type="hidden" name="Id" value="@ViewBag.Eraisik.Id">
+    <input type="hidden" name="EraisikId" value="@ViewBag.Eraisik.EraisikId">
+
+    <div class="mb-3">
+        <label for="eraisik-edit-eesnimi" class="form-label">Eesnimi:</label>
+        <input type="text" class="form-control" id="eraisik-edit-eesnimi" name="Eesnimi" value="@ViewBag.Eraisik.Eesnimi" minlength="3" maxlength="50" required />
+        <div class="invalid-feedback">
+            Peaks olema Eesnimi!
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="eraisik-edit-perekonnanimi" class="form-label">Perekonnanimi:</label>
+        <input type="text" class="form-control" id="eraisik-edit-perekonnanimi" name="Perekonnanimi" value="@ViewBag.Eraisik.Perekonnanimi" minlength="3" maxlength="50" required />
+        <div class="invalid-feedback">
+            Peaks olema Perekonnanimi!
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="eraisik-edit-isikukood" class="form-label">Isikukood:</label>
+        <input type="text" class="form-control" id="eraisik-edit-isikukood" name="Isikukood" value="@ViewBag.Eraisik.Isikukood" minlength="11" maxlength="11" required />
+        <div class="invalid-feedback" id="eraisik-edit-isikukood-invalid-feedback">
+            Peaks olema Isikukood!
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="eraisik-edit-makseviis" class="form-label">Makseviis:</label>
+        <select class="form-select" id="eraisik-edit-makseviis" name="MakseviisId" required>
+            @foreach (var item in ViewBag.Makseviisid)
+            {
+                if (item.Id == ViewBag.Eraisik.MakseviisId)
+                {
+                    <option value="@item.Id" selected>@item.Nimi</option>
+                }
+                else
+                {
+                    <option value="@item.Id">@item.Nimi</option>
+                }
+            }
+
+        </select>
+        <div class="invalid-feedback">
+            Peaks olema Makseviis!
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="eraisik-edit-lisainfo" class="form-label">Lisainfo:</label>
+        <textarea class="form-control" id="eraisik-edit-lisainfo" rows="5" name="Lisainfo" maxlength="1500">@ViewBag.Eraisik.Lisainfo</textarea>
+    </div>
+
+</form>

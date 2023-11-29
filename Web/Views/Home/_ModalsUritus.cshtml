@@ -27,13 +27,13 @@
     </div>
 </div>
 
-<!-- Eraisikute Lisamine Modal -->
+<!-- Eraisiku Lisamine Modal -->
 
 <div class="modal fade" id="eraisik-add-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="eraisik-add-modal-title" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="eraisik-add-modal-title">Eraisikute Lisamine</h1>
+                <h1 class="modal-title fs-5" id="eraisik-add-modal-title">Eraisiku Lisamine</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -77,13 +77,13 @@
     </div>
 </div>
 
-<!-- Eraisikute Eemaldamine Modal -->
+<!-- Eraisiku Eemaldamine Modal -->
 
 <div class="modal fade" id="eraisik-delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="eraisik-delete-modal-title" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="eraisik-delete-modal-title">Eraisikute Eemaldamine</h1>
+                <h1 class="modal-title fs-5" id="eraisik-delete-modal-title">Eraisiku Eemaldamine</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -112,6 +112,27 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Katkesta</button>
                 <button type="button" class="btn btn-danger" id="ettevote-delete-modal-delete-btn">Olen Kindel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Eraisiku Muutmine Modal -->
+
+<div class="modal fade" id="eraisik-edit-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="eraisik-edit-modal-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="eraisik-edit-modal-title">Eraisiku Muutmine</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="eraisik-edit-modal-content"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Katkesta</button>
+                <button type="button" class="btn btn-success" id="eraisik-edit-modal-edit-btn">
+                    <span class="spinner-border spinner-border-sm d-none" id="eraisik-edit-modal-spinner" role="status" aria-hidden="true"></span>
+                    Muuda Eraisik
+                </button>
             </div>
         </div>
     </div>

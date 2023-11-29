@@ -296,7 +296,7 @@ function MuudaUritus() {
 }
 
 
-function _validateEraisik() {
+function _validateUusEraisik() {
 
     if (!_validIdCode($("input#uus-eraisik-isikukood"), $("form#uus-eraisik"))) return false;
 
@@ -316,7 +316,7 @@ function LisaEraisik() {
 
     form.addClass("was-validated");
 
-    if (_validateEraisik()) {
+    if (_validateUusEraisik()) {
 
         var spinner = $("span#eraisik-add-modal-spinner");
 
@@ -400,7 +400,7 @@ function LisaEttevote() {
 }
 
 
-function AlustaEraisikuteEemaldamine(id, nimi) {
+function AlustaEraisikuEemaldamine(id, nimi) {
 
     $("span#eraisik-nimi-delete-modal").html("\"" + nimi + "\"");
     $("button#eraisik-delete-modal-delete-btn").attr("onclick", "EemaldaEraisik(" + id + ")");
@@ -445,4 +445,79 @@ function EemaldaEttevote(id) {
 
         setTimeout(function () { target.load("/Home/UrituseOsalejad", { Id: id, tabNr: 2 }); }, 550);
     });
+}
+
+
+function _showOsalejaEditLoader() {
+
+    var loader = $("section#osalejad-edit-loader");
+    var target = $("div#eraisik-edit-modal-content");
+
+    target.html(loader.html());
+}
+
+
+function AlustaEraisikuMuutmine(id) {
+
+    _showOsalejaEditLoader();
+
+    $("div#eraisik-edit-modal").modal("show");
+
+    var target = $("div#eraisik-edit-modal-content");
+    var button = $("button#eraisik-edit-modal-edit-btn");
+
+    setTimeout(function () {
+        target.load("/Home/EraisikuAndmed", { Id: id },
+            function () { button.attr("onclick", "MuudaEraisik(" + id + ")"); });
+    }, 550);
+}
+
+
+function _validateEraisikEdit() {
+
+    if (!_validIdCode($("input#eraisik-edit-isikukood"), $("form#eraisik-edit"))) return false;
+
+    var isValid = true;
+
+    isValid = isValid && _notEmpty($("input#eraisik-edit-eesnimi"));
+    isValid = isValid && _notEmpty($("input#eraisik-edit-perekonnanimi"));
+
+    return isValid;
+}
+
+
+function MuudaEraisik(id) {
+
+    var form = $("form#eraisik-edit");
+
+    form.addClass("was-validated");
+
+    if (_validateEraisikEdit()) {
+
+        var spinner = $("span#eraisik-edit-modal-spinner");
+
+        spinner.removeClass("d-none");
+
+        $.post("/Home/MuudaEraisik", form.serialize(),
+
+            function (response) {
+
+                if (response.tehtud) {
+
+                    setTimeout(function () {
+
+                        $("div#eraisik-edit-modal").modal("hide");
+                        spinner.addClass("d-none");
+
+                        _showUrituseOsalejadLoader();
+
+                        var target = $("div#urituse-osalejad");
+                        var id = $("input#uus-eraisik-uritus-id").val();
+
+                        setTimeout(function () { target.load("/Home/UrituseOsalejad", { Id: id, tabNr: 1 }); }, 1250);
+
+                    }, 850);
+                }
+            }, "json");
+    }
 }

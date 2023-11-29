@@ -279,6 +279,53 @@ namespace Web.Controllers
             }
         }
 
+        [HttpPost]
+        public IActionResult EraisikuAndmed(int Id)
+        {
+            using (UritusHandler handler = new(_context))
+            {
+                var eraisik = handler.GetEraisikOsaleja(Id);
+
+                eraisik.Wait();
+
+                if (eraisik.Result != null) ViewBag.Eraisik = Mapper.MappIt<EraisikOsalejaViewModel>(eraisik.Result);
+                else
+                    ViewBag.Eraisik = null;
+
+                var makseviisid = handler.GetMakseviisid();
+
+                makseviisid.Wait();
+
+                ViewBag.Makseviisid = makseviisid.Result.Select(Mapper.MappIt<MakseviisViewModel>).ToList();
+
+                return PartialView();
+            }
+        }
+
+        [HttpPost]
+        public JsonResult MuudaEraisik(EraisikOsalejaViewModel eraisik)
+        {
+            if (ModelState.IsValid)
+            {
+                using (UritusHandler handler = new(_context))
+                {
+                    var query = handler.MuudaEraisikOsaleja(Mapper.MappIt<EraisikOsalejaDto>(eraisik));
+
+                    query.Wait();
+
+                    return Json(new
+                    {
+                        tehtud = true
+                    });
+                }
+            }
+
+            return Json(new
+            {
+                tehtud = false
+            });
+        }
+
         [HttpGet]
         public IActionResult Privacy()
         {

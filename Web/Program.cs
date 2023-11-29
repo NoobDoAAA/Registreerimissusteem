@@ -43,5 +43,7 @@ app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Lisa
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=UrituseOsalejad}/{Id}");
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=EemaldaEraisik}/{Id}");
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=EemaldaEttevote}/{Id}");
+app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=EraisikuAndmed}/{Id}");
+app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=MuudaEraisik}");
 
 app.Run();
