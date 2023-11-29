@@ -448,7 +448,7 @@ function EemaldaEttevote(id) {
 }
 
 
-function _showOsalejaEditLoader() {
+function _showEraisikEditLoader() {
 
     var loader = $("section#osalejad-edit-loader");
     var target = $("div#eraisik-edit-modal-content");
@@ -459,7 +459,7 @@ function _showOsalejaEditLoader() {
 
 function AlustaEraisikuMuutmine(id) {
 
-    _showOsalejaEditLoader();
+    _showEraisikEditLoader();
 
     $("div#eraisik-edit-modal").modal("show");
 
@@ -468,7 +468,7 @@ function AlustaEraisikuMuutmine(id) {
 
     setTimeout(function () {
         target.load("/Home/EraisikuAndmed", { Id: id },
-            function () { button.attr("onclick", "MuudaEraisik(" + id + ")"); });
+            function () { button.attr("onclick", "MuudaEraisik()"); });
     }, 550);
 }
 
@@ -486,7 +486,7 @@ function _validateEraisikEdit() {
 }
 
 
-function MuudaEraisik(id) {
+function MuudaEraisik() {
 
     var form = $("form#eraisik-edit");
 
@@ -515,6 +515,82 @@ function MuudaEraisik(id) {
                         var id = $("input#uus-eraisik-uritus-id").val();
 
                         setTimeout(function () { target.load("/Home/UrituseOsalejad", { Id: id, tabNr: 1 }); }, 1250);
+
+                    }, 850);
+                }
+            }, "json");
+    }
+}
+
+
+function _showEttevoteEditLoader() {
+
+    var loader = $("section#osalejad-edit-loader");
+    var target = $("div#ettevote-edit-modal-content");
+
+    target.html(loader.html());
+}
+
+
+function AlustaEttevoteMuutmine(id) {
+
+    _showEttevoteEditLoader();
+
+    $("div#ettevote-edit-modal").modal("show");
+
+    var target = $("div#ettevote-edit-modal-content");
+    var button = $("button#ettevote-edit-modal-edit-btn");
+
+    setTimeout(function () {
+        target.load("/Home/EttevoteAndmed", { Id: id },
+            function () { button.attr("onclick", "MuudaEttevote()"); });
+    }, 550);
+}
+
+
+function _validateEttevoteEdit() {
+
+    if (!_validOsavotjateArv($("input#ettevote-edit-osavotjatearv"), $("form#ettevote-edit"))) return false;
+
+    var isValid = true;
+
+    isValid = isValid && _notEmpty($("input#ettevote-edit-nimi"));
+    isValid = isValid && _notEmpty($("input#ettevote-edit-registrikood"));
+    isValid = isValid && _notEmpty($("select#ettevote-edit-makseviis"));
+
+    return isValid;
+}
+
+
+function MuudaEttevote() {
+
+    var form = $("form#ettevote-edit");
+
+    form.addClass("was-validated");
+
+    if (_validateEttevoteEdit()) {
+
+        var spinner = $("span#ettevote-edit-modal-spinner");
+
+        spinner.removeClass("d-none");
+
+        $.post("/Home/MuudaEttevote", form.serialize(),
+
+            function (response) {
+
+                if (response.tehtud) {
+
+                    setTimeout(function () {
+
+                        $("div#ettevote-edit-modal").modal("hide");
+                        spinner.addClass("d-none");
+
+                        _showUrituseOsalejadLoader();
+
+                        var target = $("div#urituse-osalejad");
+                        var id = $("input#uus-ettevote-uritus-id").val();
+
+                        setTimeout(function () { target.load("/Home/UrituseOsalejad", { Id: id, tabNr: 2 }); }, 1250);
 
                     }, 850);
                 }

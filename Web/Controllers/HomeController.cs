@@ -326,6 +326,53 @@ namespace Web.Controllers
             });
         }
 
+        [HttpPost]
+        public IActionResult EttevoteAndmed(int Id)
+        {
+            using (UritusHandler handler = new(_context))
+            {
+                var ettevote = handler.GetEttevoteOsaleja(Id);
+
+                ettevote.Wait();
+
+                if (ettevote.Result != null) ViewBag.Ettevote = Mapper.MappIt<EttevoteOsalejaViewModel>(ettevote.Result);
+                else
+                    ViewBag.Ettevote = null;
+
+                var makseviisid = handler.GetMakseviisid();
+
+                makseviisid.Wait();
+
+                ViewBag.Makseviisid = makseviisid.Result.Select(Mapper.MappIt<MakseviisViewModel>).ToList();
+
+                return PartialView();
+            }
+        }
+
+        [HttpPost]
+        public JsonResult MuudaEttevote(EttevoteOsalejaViewModel ettevote)
+        {
+            if (ModelState.IsValid)
+            {
+                using (UritusHandler handler = new(_context))
+                {
+                    var query = handler.MuudaEttevoteOsaleja(Mapper.MappIt<EttevoteOsalejaDto>(ettevote));
+
+                    query.Wait();
+
+                    return Json(new
+                    {
+                        tehtud = true
+                    });
+                }
+            }
+
+            return Json(new
+            {
+                tehtud = false
+            });
+        }
+
         [HttpGet]
         public IActionResult Privacy()
         {

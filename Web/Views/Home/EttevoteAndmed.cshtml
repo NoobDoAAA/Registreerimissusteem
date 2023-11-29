@@ -2,4 +2,59 @@
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
-...
+<form id="ettevote-edit">
+
+    <input type="hidden" name="Id" value="@ViewBag.Ettevote.Id">
+    <input type="hidden" name="EttevoteId" value="@ViewBag.Ettevote.EttevoteId">
+
+    <div class="mb-3">
+        <label for="ettevote-edit-nimi" class="form-label">Ettevõtte juriidiline nimi:</label>
+        <input type="text" class="form-control" id="ettevote-edit-nimi" name="EttevoteNimi" value="@ViewBag.Ettevote.EttevoteNimi" minlength="3" maxlength="50" required />
+        <div class="invalid-feedback">
+            Peaks olema Ettevõtte juriidiline nimi!
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="ettevote-edit-registrikood" class="form-label">Ettevõtte registrikood:</label>
+        <input type="text" class="form-control" id="ettevote-edit-registrikood" name="Registrikood" value="@ViewBag.Ettevote.Registrikood" minlength="3" maxlength="50" required />
+        <div class="invalid-feedback">
+            Peaks olema Ettevõtte registrikood!
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="ettevote-edit-osavotjatearv" class="form-label">Ettevõttest tulevate osavõtjate arv:</label>
+        <input type="text" class="form-control" id="ettevote-edit-osavotjatearv" name="OsavotjateArv" value="@ViewBag.Ettevote.OsavotjateArv" maxlength="7" required />
+        <div class="invalid-feedback" id="ettevote-edit-osavotjatearv-invalid-feedback">
+            Peaks olema Ettevõttest tulevate osavõtjate arv!
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="ettevote-edit-makseviis" class="form-label">Makseviis:</label>
+        <select class="form-select" id="ettevote-edit-makseviis" name="MakseviisId" required>
+            @foreach (var item in ViewBag.Makseviisid)
+            {
+                if (item.Id == ViewBag.Ettevote.MakseviisId)
+                {
+                    <option value="@item.Id" selected>@item.Nimi</option>
+                }
+                else
+                {
+                    <option value="@item.Id">@item.Nimi</option>
+                }
+            }
+
+        </select>
+        <div class="invalid-feedback">
+            Peaks olema Makseviis!
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="ettevote-edit-lisainfo" class="form-label">Lisainfo:</label>
+        <textarea class="form-control" id="ettevote-edit-lisainfo" rows="5" name="Lisainfo" maxlength="5000">@ViewBag.Ettevote.Lisainfo</textarea>
+    </div>
+
+</form>
