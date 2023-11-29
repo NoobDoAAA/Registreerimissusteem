@@ -39,6 +39,16 @@ namespace DataAccessLayer.Logic
             return _dbContext.EttevoteOsaleja.AsQueryable();
         }
 
+        private IQueryable<Eraisik> GetAllEraisikud()
+        {
+            return _dbContext.Eraisik.AsQueryable();
+        }
+
+        private IQueryable<Ettevote> GetAllEttevotted()
+        {
+            return _dbContext.Ettevote.AsQueryable();
+        }
+
         private IQueryable<Makseviis> GetAllMakseviisid()
         {
             return _dbContext.Makseviis.AsQueryable();
@@ -119,6 +129,14 @@ namespace DataAccessLayer.Logic
             if (dbUritus != null)
             {
                 dbUritus.Kustutatud = true;
+
+                var dbOsalejad = await GetAllOsalejad().Where(o => o.UritusId == Id && !o.Kustutatud).ToListAsync();
+
+                foreach (var osaleja in dbOsalejad)
+                {
+                    osaleja.Kustutatud = true;
+                }
+
                 await _dbContext.SaveChangesAsync();
                 return true;
             }
@@ -323,6 +341,36 @@ namespace DataAccessLayer.Logic
             await _dbContext.Osaleja.AddAsync(osaleja);
             await _dbContext.SaveChangesAsync();
 
+            return true;
+        }
+
+        /// <summary>
+        /// Eemalda eraisik
+        /// </summary>
+        public async Task<bool> EemaldaEraisikOsaleja(int Id)
+        {
+            var dbOsaleja = await _dbContext.Osaleja.FindAsync(Id);
+
+            if (dbOsaleja == null) return false;
+
+            dbOsaleja.Kustutatud = true;
+
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }
+
+        /// <summary>
+        /// Eemalda ettevote
+        /// </summary>
+        public async Task<bool> EemaldaEttevoteOsaleja(int Id)
+        {
+            var dbOsaleja = await _dbContext.Osaleja.FindAsync(Id);
+
+            if (dbOsaleja == null) return false;
+
+            dbOsaleja.Kustutatud = true;
+
+            await _dbContext.SaveChangesAsync();
             return true;
         }
     }

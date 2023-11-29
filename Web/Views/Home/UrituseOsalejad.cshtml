@@ -2,13 +2,31 @@
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
-<div class="tab-pane container fade show active tab-pane-content" id="osalejad-eraisikud" style="padding-top:1.5rem">
 
-    <partial name="_OsalejadEraisikud.cshtml" />
+@if (ViewBag.TabNr == null || ViewBag.TabNr == 1)
+{
+    <div class="tab-pane container fade show active tab-pane-content" id="osalejad-eraisikud" style="padding-top:1.5rem">
 
-</div>
-<div class="tab-pane container fade tab-pane-content" id="osalejad-ettevotted" style="padding-top:1.5rem">
+        <partial name="_OsalejadEraisikud.cshtml" />
 
-    <partial name="_OsalejadEttevotted.cshtml" />
+    </div>
+    <div class="tab-pane container fade tab-pane-content" id="osalejad-ettevotted" style="padding-top:1.5rem">
 
-</div>
+        <partial name="_OsalejadEttevotted.cshtml" />
+
+    </div>
+}
+else
+if (ViewBag.TabNr != null && ViewBag.TabNr == 2)
+{
+    <div class="tab-pane container fade tab-pane-content" id="osalejad-eraisikud" style="padding-top:1.5rem">
+
+        <partial name="_OsalejadEraisikud.cshtml" />
+
+    </div>
+    <div class="tab-pane container fade show active tab-pane-content" id="osalejad-ettevotted" style="padding-top:1.5rem">
+
+        <partial name="_OsalejadEttevotted.cshtml" />
+
+    </div>
+}

@@ -225,7 +225,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult UrituseOsalejad(int Id)
+        public IActionResult UrituseOsalejad(int Id, int tabNr)
         {
             using (UritusHandler handler = new(_context))
             {
@@ -240,9 +240,43 @@ namespace Web.Controllers
                 ettevoted.Wait();
 
                 ViewBag.Ettevoted = ettevoted.Result.Select(Mapper.MappIt<EttevoteOsalejaViewModel>).ToList();
+
+                ViewBag.TabNr = tabNr;
             }
 
             return PartialView();
+        }
+
+        [HttpPost]
+        public JsonResult EemaldaEraisik(int Id)
+        {
+            using (UritusHandler handler = new(_context))
+            {
+                var query = handler.EemaldaEraisikOsaleja(Id);
+
+                query.Wait();
+
+                return Json(new
+                {
+                    tehtud = query.Result
+                });
+            }
+        }
+
+        [HttpPost]
+        public JsonResult EemaldaEttevote(int Id)
+        {
+            using (UritusHandler handler = new(_context))
+            {
+                var query = handler.EemaldaEttevoteOsaleja(Id);
+
+                query.Wait();
+
+                return Json(new
+                {
+                    tehtud = query.Result
+                });
+            }
         }
 
         [HttpGet]

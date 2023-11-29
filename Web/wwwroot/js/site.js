@@ -339,7 +339,7 @@ function LisaEraisik() {
                         var target = $("div#urituse-osalejad");
                         var id = $("input#uus-eraisik-uritus-id").val();
 
-                        setTimeout(function () { target.load("/Home/UrituseOsalejad", { Id: id }); }, 1250);
+                        setTimeout(function () { target.load("/Home/UrituseOsalejad", { Id: id, tabNr: 1 }); }, 1250);
 
                     }, 850);
                 }
@@ -391,10 +391,58 @@ function LisaEttevote() {
                         var target = $("div#urituse-osalejad");
                         var id = $("input#uus-ettevote-uritus-id").val();
 
-                        setTimeout(function () { target.load("/Home/UrituseOsalejad", { Id: id }); }, 1250);
+                        setTimeout(function () { target.load("/Home/UrituseOsalejad", { Id: id, tabNr: 2 }); }, 1250);
 
                     }, 850);
                 }
             }, "json");
     }
+}
+
+
+function AlustaEraisikuteEemaldamine(id, nimi) {
+
+    $("span#eraisik-nimi-delete-modal").html("\"" + nimi + "\"");
+    $("button#eraisik-delete-modal-delete-btn").attr("onclick", "EemaldaEraisik(" + id + ")");
+    $("div#eraisik-delete-modal").modal("show");
+}
+
+
+function EemaldaEraisik(id) {
+
+    _showUrituseOsalejadLoader();
+
+    $("div#eraisik-delete-modal").modal("hide");
+
+    $.post("/Home/EemaldaEraisik", { Id: id }, function () {
+
+        var target = $("div#urituse-osalejad");
+        id = $("input#uus-eraisik-uritus-id").val();
+
+        setTimeout(function () { target.load("/Home/UrituseOsalejad", { Id: id, tabNr: 1 }); }, 550);
+    });
+}
+
+
+function AlustaEttevoteEemaldamine(id, nimi) {
+
+    $("span#ettevote-nimi-delete-modal").html("\"" + nimi + "\"");
+    $("button#ettevote-delete-modal-delete-btn").attr("onclick", "EemaldaEttevote(" + id + ")");
+    $("div#ettevote-delete-modal").modal("show");
+}
+
+
+function EemaldaEttevote(id) {
+
+    _showUrituseOsalejadLoader();
+
+    $("div#ettevote-delete-modal").modal("hide");
+
+    $.post("/Home/EemaldaEttevote", { Id: id }, function () {
+
+        var target = $("div#urituse-osalejad");
+        id = $("input#uus-ettevote-uritus-id").val();
+
+        setTimeout(function () { target.load("/Home/UrituseOsalejad", { Id: id, tabNr: 2 }); }, 550);
+    });
 }
