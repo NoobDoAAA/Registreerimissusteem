@@ -459,12 +459,14 @@ function _showEraisikEditLoader() {
 
 function AlustaEraisikuMuutmine(id) {
 
+    var button = $("button#eraisik-edit-modal-edit-btn");
+    var target = $("div#eraisik-edit-modal-content");
+
+    button.removeAttr("onclick");
+
     _showEraisikEditLoader();
 
     $("div#eraisik-edit-modal").modal("show");
-
-    var target = $("div#eraisik-edit-modal-content");
-    var button = $("button#eraisik-edit-modal-edit-btn");
 
     setTimeout(function () {
         target.load("/Home/EraisikuAndmed", { Id: id },
@@ -534,12 +536,14 @@ function _showEttevoteEditLoader() {
 
 function AlustaEttevoteMuutmine(id) {
 
+    var button = $("button#ettevote-edit-modal-edit-btn");
+    var target = $("div#ettevote-edit-modal-content");
+
+    button.removeAttr("onclick");
+
     _showEttevoteEditLoader();
 
     $("div#ettevote-edit-modal").modal("show");
-
-    var target = $("div#ettevote-edit-modal-content");
-    var button = $("button#ettevote-edit-modal-edit-btn");
 
     setTimeout(function () {
         target.load("/Home/EttevoteAndmed", { Id: id },
